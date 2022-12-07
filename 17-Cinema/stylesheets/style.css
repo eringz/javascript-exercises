@@ -1,0 +1,14 @@
+*{
+    text-align: center;
+}
+    h1{
+        color: green;
+    }
+    img{
+        display: block;
+        margin: auto;
+    }
+    a{
+        display: block;
+        margin-top: 10px;
+    }

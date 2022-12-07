@@ -1,0 +1,22 @@
+*{
+    text-align: center;
+    font-family: sans-serif;
+    color: green;
+}
+    form{
+        display: block;
+        margin: 20px;
+    }
+        input{
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+        }
+        #reset{
+            background-color: red;
+            color: wheat;
+        }
+        #repeat{
+            background-color: green;
+            color:azure
+        }

@@ -1,0 +1,57 @@
+*{
+    font-family: sans-serif;
+    text-align: center;
+}
+    body{
+        margin: 0;
+    }
+        .announcement{
+            margin: 40px auto;
+        }
+        h1{
+            color: green;
+        }
+        p{
+            margin: 10px 5px;
+        }
+        .discount{
+            border: 1px dashed green;
+            width: 300px;
+        }
+        .discount, form{
+            margin: 0 auto;
+        }
+            .div-option{
+                width: 100%;
+            }
+                .btn-option{
+                    display: inline-block;
+                    width: 40%;
+                    margin: 0;
+                }
+                input{
+                    display: block;
+                    margin: 10px auto;
+                }
+                #submit, #claim{
+                    background-color: green;
+                    border: 1px solid green;
+                    color: azure;
+                }
+                #reset{
+                    background-color: red;
+                    border: 1px solid red;
+                    color: wheat;
+                }
+                #submit, #claim, #reset{
+                    padding: 5px 20px;
+                    border-radius: 3px;
+                }
+        div#footer{
+            background-color: #072750;
+            color: #EDFCFF;
+            margin: 48% 0 0 0;
+            padding: 20px;
+            width: 97.6%;
+            text-align: center;
+        }

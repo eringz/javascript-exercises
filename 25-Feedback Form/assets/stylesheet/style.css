@@ -1,0 +1,68 @@
+*{
+    font-family: sans-serif;
+}
+    body{
+        margin: 0;
+    }
+        form{
+            margin: 20px auto;
+            padding: 20px;
+            width: 500px;
+            border: 1px solid green;
+        }
+            h1{
+                text-align: center;
+                color: green;
+            }
+            input, textarea{
+                font-size: 1rem;
+                margin: 20px;
+                padding: 5px;   
+            }
+            input{
+                display: block;
+                width: 90%;
+                height: 30px;
+            }
+            label{
+                display: inline-block;
+                margin: 0 20px;
+            }
+            select{
+                height: 40px;
+                padding: 10px;
+                margin: 20px
+            }
+            #course,textarea{
+                display: block;
+                
+            }
+            #submit{
+                width: 100px;
+                margin: 20px auto;
+                background-color: green;
+                color: azure;
+                border: 1px solid green;
+                border-radius: 2px;
+            }
+        div.content{
+            margin: 20px auto;
+            width: 500px;
+            border: 1px solid green;
+        }
+            p{
+                margin: 20px;
+            }
+                span{
+                    display: inline-block;
+                    width: 200px;
+                    color: green;
+                }
+        div#footer{
+            background-color: #072750;
+            color: #EDFCFF;
+            margin: 48% 0 0 0;
+            padding: 20px;
+            width: 97.6%;
+            text-align: center;
+        }

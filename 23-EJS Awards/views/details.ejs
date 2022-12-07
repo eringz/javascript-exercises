@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Details Page</title>
+    <style>
+        .award{
+            width: 200px;
+            padding: 50px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <h1>Details about <%= award.course %> Exam</h1>
+    <div class="award"> <%= award.course %> Certificate </div>
+    <p>Date: <%= award.date %></p>
+    <p>Awarded by: <%= award.mentor %></p>
+    <p>Technologies:</p>
+<% for(var x in award.technologies){ %>
+        <ul>
+            <li> <%= award.technologies[x] %> </li>
+        </ul>
+<% } %>
+</body>
+</html>

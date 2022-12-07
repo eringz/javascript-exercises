@@ -1,0 +1,54 @@
+*{
+    /* outline: 1px dotted pink; */
+    font-family: sans-serif;
+}
+    body{
+        background-image: linear-gradient(rgba(0,0,0,255), rgba(0,0,10,100),rgba(0,0,0,100),rgba(0,0,0,255));
+    }
+        #header{
+            text-align: center;
+        }
+            input{
+                vertical-align: top;
+                width: 80px;
+                height: 60px;
+                margin: 0 20px; 
+                border: none;
+                
+            }
+            .active{
+                border: 2px solid white;
+            }
+            #red{
+                background-color: red;
+            }
+            #green{
+                background-color: green;
+
+            }
+            #blue{
+                background-color: blue;
+            }
+            #circle, #rectangle, #square{
+                background-color: brown;
+            }
+            #circle{
+                width: 60px;
+                height: 60px;
+                margin-left: 300px;
+                border-radius: 100%;
+            }
+            #rectangle{
+                width: 120px;
+                height: 60px;
+            }
+            #square{
+                margin-right: 500px;
+            }
+            #reset{
+                background-color: yellow;
+            }
+        #canvas{    
+            height: 800px;
+        }
+      

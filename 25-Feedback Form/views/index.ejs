@@ -1,0 +1,30 @@
+<%- include('./partials/head'); %>
+
+    <form action="/result" method="POST">
+        <h1>Feeback Form</h1>
+        <input type="text" name="name" placeholder="Your Name(optional)">
+        <label>Course Title:</label>
+        <select name="course" id="course">
+            <option value="Web Fundamentals">Web Fundamentals</option>
+            <option value="PHP Track">PHP Track</option>
+            <option value="JS Track">JS Track</option>
+        </select>
+        <label>Given Score(1-10):</label>
+        <select name="score" id="">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        <textarea name="reason" placeholder="Reason" id="" cols="55" rows="5"></textarea>
+        <input type="submit" value="Submit" id="submit">
+    </form>
+
+<%- include('./partials/footer'); %>
+

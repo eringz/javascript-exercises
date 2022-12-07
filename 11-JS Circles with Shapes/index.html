@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Circles</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="circle_with_shapes.js"></script>
+</head>
+<body>
+    <div id="header">
+        <input  id="red" type="submit" value="" >
+        <input  id="green" type="submit" value="">
+        <input  id="blue" type="submit" value="">
+        <input  id="circle" type="submit" value="">
+        <input  id="rectangle" type="submit" value="">
+        <input  id="square" type="submit" value="">
+        <input  id="reset" type="submit" value="Reset">
+    </div>
+    <div id="canvas" ></div>
+
+    <script>
+
+        //INITIALIZING VARIABLES INCLUDING DOCUMENT ELEMENTS
+        let shape = new Shape("green");  
+        var count = 0;
+        var color = "";
+        let active_shape = "";
+        const input = document.getElementsByTagName("input");
+        const canvas = document.getElementById("canvas");
+        const animate = document.getElementById("animate");
+        const reset = document.getElementById("reset");
+        const paragraph = document.getElementsByTagName("p");
+            
+        //SETTING COLOR, SHAPE AND ACTIVE WHEN CLICKED
+        for(let i = 0; i < input.length; i++){
+            input[i].addEventListener("click", function(){
+            
+                //REPLACE CLASS TO ACTIVE IN ELEMENT THAT HAS BEEN CLICKED OTHERWISE NO CLASS
+                let current = document.getElementsByClassName("active");
+                if(current.length > 0){
+                    current[0].className = current[0].className.replace("active", "");
+                }
+                this.className = "active";
+
+                //SETTING CORRESPONDING SHAPE AND COLOR IN EVERY ACTIVE ELEMENT
+                if(this.id != "reset" && this.id != "rectangle" && this.id != "circle" && this.id != "square"){
+                    color = this.id;  
+                    active_shape = shape.shape;             
+                }else if(this.id == "reset"){
+                    color = "green";
+                    active_shape = "circle" 
+                }else{
+                    color = shape.color
+                    active_shape = this.id;  
+                }
+
+                //UPDATING COLOR AND SHAPES INTO SHAPE CLASS
+                shape.update_color(color);
+                shape.update_shape(active_shape);            
+            });
+        }
+
+        //CREATE CHOSEN SHAPES IN A CLICK EVENT
+        canvas.addEventListener("click", function(event){
+            count++;
+            let top = event.clientY;
+            let left = event.clientX;
+
+            //DETERMINE THE SHAPES 
+            if(shape.shape == "rectangle"){
+                shape = new Rectangle(shape.color);
+            }else if(shape.shape == "square"){
+                shape = new Square(shape.color);
+            }else if(shape.shape == "circle"){
+                shape = new Circle(shape.color);
+            }
+
+            //EXECUTE AND DRAW SHAPE CHOSEN
+            shape.draw(canvas, top, left);
+        });
+
+        //REMOVING SHAPE WHEN THE RESET BUTTON CLICKED
+        reset.addEventListener("click", function(){
+            for(let i = 0; i < paragraph.length + count; i++){
+                canvas.removeChild(paragraph[0]);
+            }  
+        });
+        
+    </script>
+</body>
+</html>

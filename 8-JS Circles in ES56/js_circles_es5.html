@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Circles</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="circle_es5.js"></script>
+</head>
+<body>
+    <div id="header">
+        <input  id="red" type="submit" value="" >
+        <input  id="green" type="submit" value="">
+        <input  id="blue" type="submit" value="">
+        <input  id="reset" type="submit" value="Reset">
+    </div>
+    <div id="canvas" ></div>
+
+    <script>
+
+    //Initializing document elements as variables
+    var circle = new Circle();  
+    var count = 0;
+    const input = document.getElementsByTagName("input");
+    const canvas = document.getElementById("canvas");
+    const animate = document.getElementById("animate");
+    const reset = document.getElementById("reset");
+    const paragraph = document.getElementsByTagName("p");
+
+    //Setting color and active when clicked
+    for(let i = 0; i < input.length; i++){
+        input[i].addEventListener("click", function(){
+            
+            //Replace class to active in element that has been clicked otherwise no class
+            let current = document.getElementsByClassName("active");
+            if(current.length > 0){
+                current[0].className = current[0].className.replace("active", "");
+            }
+            this.className = "active";
+
+            //Setting color of circles when click to chosen color 
+            if(this.id != "reset"){
+                color = this.id;               
+            }else{
+                color = "green";
+            }
+            circle.update_color(color);
+        });
+    }
+
+    //create circle when clicking
+    canvas.addEventListener("click", function(event){
+        count += 1;
+        let diameter = Math.floor(Math.random()*200 +10);
+        circle.update_diameter(diameter)
+        
+        //creating <p> tags with its properties and attributes instantiate by circle
+        const p = document.createElement("p");
+        p.style.position = "absolute";
+        p.style.top = (event.clientY - (circle.diameter/2))+"px";
+        p.style.left = (event.clientX - (circle.diameter/2))+"px";
+        p.style.width = circle.diameter+"px";
+        p.style.height = circle.diameter+"px";
+        p.style.borderRadius = circle.radius;
+        p.style.backgroundColor = circle.color;
+
+        canvas.appendChild(p);
+    });
+
+    //reset circle
+    reset.addEventListener("click", function(){
+        for(let i = 0; i < paragraph.length + count; i++){
+            canvas.removeChild(paragraph[0]);
+        }  
+    });
+
+
+
+
+
+
+
+
+
+
+
+    
+        
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

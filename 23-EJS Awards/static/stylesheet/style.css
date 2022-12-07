@@ -1,0 +1,14 @@
+*{
+    color: green;
+    text-align: center;
+    font-family: sans-serif;
+}
+    a{
+        display: inline-block;
+        padding: 100px;
+        background-color: aqua;
+        border-radius: 3px;
+        margin: 20px auto;
+        text-decoration: none;
+
+    }

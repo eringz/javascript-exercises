@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Circles</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    *{
+        /* outline: 1px dotted pink; */
+        font-family: sans-serif;
+    }
+        #header{
+            text-align: center;
+        }
+            input{
+                /* background-color: red; */
+                vertical-align: top;
+                width: 80px;
+                height: 60px;
+                margin: 0 20px; 
+                border: none;
+            }
+            .active{
+                border: 2px solid black;
+            }
+            #red{
+                background-color: red;
+            }
+            #green{
+                background-color: green;
+
+            }
+            #blue{
+                background-color: blue;
+
+            }
+        #canvas{    
+            height: 800px;
+        }
+            p{
+                background-color: green;
+                margin: 0;
+            }
+            p.red{
+                background-color: red;
+            }
+            p.green{
+                background-color: green;
+            }
+            p.blue{
+                background-color: blue;
+            }
+            p.reset{
+                display: none;
+            }
+
+        
+</style>
+
+<body>
+    <div id="header">
+        <input  id="red" type="submit" value="" >
+        <input   id="green" type="submit" value="">
+        <input class="" id="blue" type="submit" value="">
+        <input id="reset" type="submit" value="Reset">
+    </div>
+    <div id="canvas" ></div>
+        
+    <script>
+    var tag_class = "";
+    var color = "green";
+    var circles = [];
+    var count = 0;
+
+
+    const input = document.getElementsByTagName("input");
+    const canvas = document.getElementById("canvas");
+    const animate = document.getElementById("animate");
+    const reset = document.getElementById("reset");
+    const p = document.getElementsByTagName("p");
+        
+
+
+    // make a logic for when clicking input it will add a class active
+    for(var i = 0; i<input.length; i++){
+        input[i].addEventListener("click", function(){
+            if(this.id != "reset"){
+                color = this.id; 
+                tag_class = "";
+
+            }else{
+                color = "green";
+                tag_class = "reset";
+            }
+            let current = document.getElementsByClassName("active");
+            if(current.length > 0){
+                current[0].className = current[0].className.replace("active", "");
+            }
+            this.className = "active";
+            this.id = this.id;
+
+            // color = this.id;
+        });
+    }
+
+
+    // creating circle
+    canvas.addEventListener("click", function(){
+        let circle = {};
+        let diameter = Math.floor(Math.random()*200 +10)
+        circle.top = event.clientY - (diameter/2);
+        circle.left = event.clientX - (diameter/2);
+        circle.diameter = diameter;
+        circle.color = color;
+        count++;
+        // console.log(circle);
+        circles.push(circle);
+        // console.log("Number of Circles: ", circles.length, "circles array:", circles);
+            // }
+    });
+
+    //circle animation
+    setInterval(function(){
+        for(let i = 0; i < circles.length; i++){
+            circles[i].diameter -= 5;
+        }
+        display(circles);
+        },80);
+
+    //displaying circles
+    function display(circles){
+        canvas.innerHTML = "";
+        for(let i = 0; i < circles.length; i++){
+            if(circles[i].diameter > 0 ){
+                canvas.innerHTML += '<p class=" '+tag_class+' " style="position:absolute; top:'+circles[i].top+'px; left:'+circles[i].left+'px; width:'+circles[i].diameter+'px; height:'+circles[i].diameter+'px; border-radius:100px; background-color: '+circles[i].color+'; border: 1px solid aqua; "></p>';    
+            }
+        }
+    }
+    // deleteng circles
+    reset.addEventListener("click", function(){
+    for(let i = 0; i < circles.length; i++){
+            circles[0].shift;
+    } 
+    });
+        
+
+    </script>
+
+</body>
+</html>
+
