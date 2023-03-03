@@ -1,62 +1,56 @@
-function foreach(arr, callback){
-    for(let i = 0; i<arr.length; i++){
-        arr[i] = callback(arr[i]);
+/*
+    What I want you to do is to come up with a program that gets each ninja to take a turn, 
+        and to attack each other, for a total of 10 rounds.  
+        When a ninja attacks, it should return a random number between 0 to the strength of that ninja.  
+        For example, for ninja1, whenever attack method is invoked for ninja1, it should return a random number between 0 to 15.  
+        For ninja2, the attack method should return a random number between 0 to 10.
+
+    After each attack, your program should tell who attacked who and what the hp of each ninja is now.  
+        After all 10 rounds of attack, announce who the winner is (based on who still has the higher hp).
+
+    For example, once your program runs, it may display an output such as this:
+
+    ===Round 1===
+    Ninja1 attacks Ninja2 and does a damage of 9!   Ninja1 health: 100.  Ninja2 health: 142
+    Ninja2 attacks Ninja1 and does a damage of 8!   Ninja1 health: 92.   Ninja2 health: 142
+    ===Round 2===
+    Ninja1 attacks Ninja2 and does a damage of 3!   Ninja1 health: 92.  Ninja2 health: 139
+    Ninja2 attacks Ninja1 and does a damage of 10!  Ninja1 health: 82.  Ninja2 health: 139
+    ...
+    ...
+    ...
+    ===Round 10===
+    Ninja1 attacks Ninja2 and does a damage of 13!  Ninja1 health: 35.  Ninja2 health: 48
+    Ninja2 attacks Ninja1 and does a damage of 10!  Ninja1 health: 25.  Ninja2 health: 48
+    Ninja2 WINS!!!!!
+*/
+var ninja1 = {
+    hp: 100,
+    strength: 15,
+    attack: function() {
+       let damage = Math.round(Math.random()*this.strength);
+       ninja2.hp -= damage;
+       console.log('Ninja1 attacks Ninja2 and does a damage of ',damage,'! Ninja1 health:',this.hp,', Ninja2 health:',ninja2.hp);
     }
-    return arr;
 }
 
-//1 
-let result = foreach([1,2,3,4,5], function(num) { return num*2; });
-console.log(result); //this should log [2,4,6,8,10]
-
-//2
-result = foreach([1,2,3,"v88", "training"], function(val) { 
-    if(typeof(val) === 'number') { 
-        return 0;
+var ninja2 = {
+    hp: 150,
+    strength: 10,
+    attack: function() {
+        let damage = Math.round(Math.random()*this.strength);
+        ninja1.hp -= damage;
+        console.log('Ninja2 attacks Ninja1 and does a damage of ',damage,'! Ninja1 health:',ninja1.hp,', Ninja2 health:',this.hp);
     }
-    else {
-        return val;
-    }
-});
-console.log(result); //this should log [0,0,0,"v88","training"];
-
-//3
-result = foreach([1,2,3,"hello"], function(val) { return typeof(val); });
-console.log(result); //this should log ["number", "number", "number", "string"];
-
-function filter(arr, callback){
-    var temp = [];
-    for(let i = 0; i < arr.length; i++){
-        if(callback(arr[i])){
-            temp.push(arr[i]);
-        }
-    }
-    arr = temp;
-    return arr;
 }
 
-result = filter([1,2,3,4,15], function(val) { return val<10; }); //this filters each value in the array and only allows values that is less than 10
-console.log(result); //this should log [1,2,3,4]
-
-/*2*/
-result = filter([1,2,3,4,15], function(val) { return val<3; }); //only allows values that is less than 3
-console.log(result); //this should log [1,2]
-
-function reject(arr, callback){
-    var temp = [];
-    for(let i = 0; i < arr.length; i++){
-        if(!callback(arr[i])){
-            temp.push(arr[i]);
-        }
+for(let i = 0; i < 10; i++){
+    console.log('=== Round',i+1,'===');
+    ninja1.attack();
+    ninja2.attack();
+    if(ninja1.hp > ninja2.hp){
+        console.log('Ninja1 WINS!!!!!');
+    }else{
+        console.log('Ninja2 WINS!!!!!')
     }
-    arr = temp;
-    return arr;
 }
-
-/*1*/
-result = reject([1,2,3,4,15], function(val) { return val<10; }); //rejects any value that is less than 10
-console.log(result); //this should log [15]
-
-/*2*/
-result = reject([1,2,3,4,15], function(val) { return val<3; }); //rejects any value that is less than 3
-console.log(result); //this should log [3,4,15]
