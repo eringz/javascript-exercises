@@ -1,0 +1,53 @@
+*{
+    /* outline: 1px dotted pink; */
+    font-family: sans-serif;
+}
+body{
+    background-color: black;
+}
+    #header{
+        text-align: center;
+    }
+        input{
+            /* background-color: red; */
+            vertical-align: top;
+            width: 80px;
+            height: 60px;
+            margin: 0 20px; 
+            border: none;
+        }
+        .active{
+            border: 2px solid black;
+        }
+        #red{
+            background-color: red;
+        }
+        #green{
+            background-color: green;
+
+        }
+        #blue{
+            background-color: blue;
+
+        }
+    #canvas{    
+        height: 800px;
+    }
+        p{
+            background-color: green;
+            margin: 0;
+        }
+        p.red{
+            background-color: red;
+        }
+        p.green{
+            background-color: green;
+        }
+        p.blue{
+            background-color: blue;
+        }
+        p.reset{
+            display: none;
+        }
+
+    
