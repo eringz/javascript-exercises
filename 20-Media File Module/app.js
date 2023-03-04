@@ -15,7 +15,7 @@ var http = require('http');
 //fs module allows us to read and write content for responses!!
 var fs = require('fs');
 
-const static_contents = require('./static');
+const static_contents = require('./static.js');
 
 
 //creating a server using http module:
@@ -24,8 +24,7 @@ var server = http.createServer(function(request,response){
     // //see what URL the clients are requesting
     console.log('client request URL:', request.url);
     static_contents(request, response);
-    
-   
+     
 });
 
 //tell your server which port to run on

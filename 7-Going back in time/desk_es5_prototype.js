@@ -30,4 +30,6 @@ let desk2 = new Desk("maple desk");
 //Updating color of Desk1 
 desk1.updateColor("brown");
 
-console.log(desk1, desk2);
+// console.log(desk1, desk2);
+desk1.updateColor("red");
+console.log(desk1.color);
