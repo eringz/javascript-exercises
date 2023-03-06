@@ -16,57 +16,30 @@ var http = require('http');
 var fs = require('fs');
 
 //creating a server using http module:
-var server = http.createServer(function(request,response){
+var server = http.createServer(function(request,response){  
     
     //see what URL the clients are requesting
     console.log('client request URL:', request.url);
 
-    //Routing configuration
-    if(request.url === '/'){
-        fs.readFile('views/index.html', 'utf8', function(errors, contents){
-            response.writeHead(200, {'Content-Type' : 'text/html'});
-            response.write(contents);
-            response.end();
-        });
-    }else if(request.url == '/movies'){
-        fs.readFile('views/movies.html', 'utf8', function(errors, contents){
-            response.writeHead(200, {'Content-Type' : 'text/html'});
-            response.write(contents);
-            response.end();
-        });
-    }else if(request.url == '/theaters'){
-        fs.readFile('views/theaters.html', 'utf8', function(errors, contents){
-            response.writeHead(200, {'Content-Type' : 'text/html'});
-            response.write(contents);
-            response.end();
-        })
-    }else if(request.url == '/movies/new'){
-        fs.readFile('views/add_movie.html', 'utf8', function(errors, contents){
-            response.writeHead(200, {'Content-Type' : 'text/html'});
-            response.write(contents);
-            response.end();
-        });
-    }else if(request.url == '/stylesheets/style.css'){
-        fs.readFile('./stylesheets/style.css', 'utf8', function(errors, contents){
-            response.writeHead(200, {'Content-type': 'text/css'});
-            response.write(contents);
-            response.end();
-        });
-    }else if(request.url == '/images/special-delivery.jpg'){
-        fs.readFile('./images/special-delivery.jpg', function(errors, contents){
-            response.writeHead(200, {'Content-Type' : 'image/jpg'});
-            response.write(contents);
-            response.end();
-        })
-    }else if(request.url == '/images/newport.jpg'){
-        fs.readFile('./images/newport.jpg', function(errors, contents){
-            response.writeHead(200, {'Content-Type' : 'image/jpg'});
-            response.write(contents);
-            response.end();
-        });
-    }else{
-        response.writeHead(404);
-        response.end('404 Not Found!')
+    let requests = [
+        {name: '/', location: './views/index.html', encoding: 'utf8', contentType: 'text/html' },
+        {name: '/movies', location: 'views/movies.html', encoding: 'utf8', contentType: 'text/html' },
+        {name: '/theaters', location: 'views/theaters.html', encoding: 'utf8', contentType: 'text/html' },
+        {name: '/movies/new', location: 'views/add_movie.html', encoding: 'utf8', contentType: 'text/html' },
+        {name: '/stylesheets/style.css', location: './stylesheets/style.css', encoding: 'utf8', contentType: 'text/css' },
+        {name: '/images/special-delivery.jpg', location: 'images/special-delivery.jpg', encoding: '', contentType: 'image/*' },
+        {name: '/images/newport.jpg', location: './images/newport.jpg', encoding: '', contentType: 'image/*' }   
+    ];
+
+    for(let i = 0; i < requests.length; i++){
+        if(request.url === requests[i].name){
+            console.log('location:', requests[i].location);
+            fs.readFile(requests[i].location, requests[i].encoding, function(errors, contents){
+                response.writeHead(200, {'Content-Type' : requests[i].contentType});                
+                response.write(contents);
+                response.end();
+            });
+        }
     }
     
 });
