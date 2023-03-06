@@ -1,14 +1,23 @@
 *{
-    color: green;
-    text-align: center;
+    color: #37C340;
+    /* text-align: center; */
     font-family: sans-serif;
 }
-    a{
-        display: inline-block;
-        padding: 100px;
-        background-color: aqua;
-        border-radius: 3px;
-        margin: 20px auto;
-        text-decoration: none;
-
+    body{
+        background-color: #1A1E23;
     }
+        h1{
+            text-align: center;
+        }
+        a{
+            display: inline-block;
+            margin: 20px 110px;
+            padding: 5px;
+            background-color: #1A1920;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+        .award{
+            text-align:start;
+            margin: 20px;
+        }

@@ -1,38 +1,21 @@
-/*
-     Create a small node server capable of handling the following request URLs:
+let str = '/images/special-delivery.jpg';
 
-     localhost:6543/    This route should serve a view file called welcome.html and display a welcome message.
-     localhost:6543/village88    This route should serve a view file called village88.html and display information about Village 88.
-     localhost:6543/training/new    This route should serve a view file called training.html 
-          and have a form (don't worry about where the form should be submitted to).
-     If the URL is anything other than the ones above, have an error page load saying that the URL requested is not available.
+console.log(str.length);
+let ext = '';
+let num = 0;
+for(let i=0; i<str.length; i++){
+    console.log(`${i}:`,str[i]);
+    if(str[i] == '.'){
+        num = i;
+    }
+}
 
-*/
+//for extension
+for(let j=num; j<str.length; j++){
+    ext += str[j];
+}
 
-const http = require('http');
-const fs = require('fs');
+console.log('start at',num);
+console.log('extension:',ext);
 
-const server = http.createServer(function(request, response){
-     console.log('Client request URL:', request.url);
-     path = '';
-     let str = '';
-     if(request.url === '/'){
-          path = 'welcome.html'
-          console.log(path);
-     }else{
-          str += request.url;
-          path = str.slice(1)+'.html';
-          console.log(path);
-     }
-
-     fs.readFile(path, 'utf8', function(errors, contents){
-          response.writeHead(200, {'Content-Type':'text/html'});
-          response.write(contents);
-          response.end();
-     });
-     
-     
-});
-
-server.listen(6543);
-console.log('Running in localhost in port 6543');
+//for 
