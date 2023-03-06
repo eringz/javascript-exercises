@@ -1,12 +1,17 @@
 var express = require('express');
 const app = express();
 
+
+// let requests = [
+//     {name:}
+// ];
+
 app.use(express.static(__dirname+'/static'));
-app.use('/style.css',express.static(__dirname+'/static/style.css'));
-app.use('/images/special-delivery.jpg',express.static(__dirname+'/static/special-delivery.jpg'));
-app.use('/images/onepiece.png',express.static(__dirname+'/static/onepiece.png'));
-app.use('/images/newport.jpg',express.static(__dirname+'/static/newport.jpg'));
-app.use('/images/leyte.gif',express.static(__dirname+'/static/leyte.gif'));
+// app.use('/style.css',express.static(__dirname+'/static/style.css'));
+// app.use('/images/special-delivery.jpg',express.static(__dirname+'/static/special-delivery.jpg'));
+// app.use('/images/onepiece.png',express.static(__dirname+'/static/onepiece.png'));
+// app.use('/images/newport.jpg',express.static(__dirname+'/static/newport.jpg'));
+// app.use('/images/leyte.gif',express.static(__dirname+'/static/leyte.gif'));
 
 // This sets the location where express will look for the ejs views
 app.set('views', __dirname + '/views'); 

@@ -2,7 +2,7 @@ module.exports = function(request,response){
     const fs = require('fs');
     const path = require('path');
     const file = 'views'+request.url;
-    const file_path = file+addExtension(file);
+    var file_path = '';
     
     function addExtension(file){
         let extension = path.extname(file);
@@ -35,16 +35,23 @@ module.exports = function(request,response){
 
     console.log(file_path);
 
-        fs.readFile(file_path, utf(file_path), function(error, contents){
-            if(!contents){
-                response.writeHead(404);
-                response.end('404 Not Found!')
-            }else{
-                response.writeHead(200, {'Content-Type' : contentType(file_path)});
-                response.write(contents);
-                response.end();
-            } 
-        });
+    if(request.url === '/'){
+        file_path = 'views/index.html';
+        console.log(file_path);
+    }else{
+        file_path = ''+file+addExtension(file);
+    }
+
+    fs.readFile(file_path, utf(file_path), function(error, contents){
+        if(!contents){
+            response.writeHead(404);
+            response.end('404 Not Found!')
+        }else{
+            response.writeHead(200, {'Content-Type' : contentType(file_path)});
+            response.write(contents);
+            response.end();
+        } 
+    });
 }
 
 
