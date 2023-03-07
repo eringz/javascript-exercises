@@ -12,7 +12,7 @@ const app = express();
 //
 app.use(express.static('assets'));
 app.use(body_parser.urlencoded({extended:false}));
-app.use(body_parser.json());
+// app.use(body_parser.json());
 
 //Set ejs in views
 app.set('/views', __dirname + '/views');

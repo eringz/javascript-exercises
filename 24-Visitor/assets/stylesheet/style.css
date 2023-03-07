@@ -1,22 +1,25 @@
 *{
     text-align: center;
     font-family: sans-serif;
-    color: green;
+    color: #34C65C;
 }
-    form{
-        display: block;
-        margin: 20px;
+    body{
+        background-color: #1E1E1F;
     }
-        input{
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
+        form{
+            display: block;
+            margin: 20px;
         }
-        #reset{
-            background-color: red;
-            color: wheat;
-        }
-        #repeat{
-            background-color: green;
-            color:azure
-        }
+            input{
+                padding: 10px 20px;
+                border: none;
+                border-radius: 3px;
+            }
+            #reset{
+                background-color: red;
+                color: wheat;
+            }
+            #repeat{
+                background-color: green;
+                color:azure
+            }

@@ -23,7 +23,7 @@ app.set('view engine', 'ejs');
 
 //
 let count = 10;
-let hide = false
+let hide = false;
 
 //Routing index in views folder
 app.get('/', function(request, response){
@@ -37,12 +37,16 @@ app.get('/', function(request, response){
 
 //processing coupon
 app.post('/process', function(request, response){
-    if(request.body.name != ''){   
+    console.log(request.session.name);
+    if(request.body.name !== ''){   
         count -= 1;
         hide = true;
     }else{
         count = count;
     }
+
+    request.session.name = request.body.name;
+    console.log(request.session.name);
     response.redirect('/');
 });
 
@@ -60,6 +64,7 @@ app.post('/claim', function(request, response){
     }else{
         hide = true;
     }
+    
     response.redirect('/');
 });
 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express with Ajax</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            let route = 'https://api.coingecko.com/api/v3/exchanges?page=1&per_page=10';
+            let count = 0;
+            $.get(route, function(data){
+                    console.log('got the data', data);
+                    console.log('length:', data.length);
+                    for(let i = 0; i<data.length-1; i++){
+                        if(i < 10){
+                            count++;
+                            document.getElementById('main').innerHTML += "<p>"+data[i].id+"</p>";
+                        }else{
+                            return;
+                        }
+                    }
+            },'json');
+
+            // $(document).on('submit', 'form', function(){
+            //     // alert($(this).serialize());
+            //     var form = $(this).attr('action');
+            //     alert(form+$(this).serialize());
+            //     $.post('/page', $(this).serialize(), function(res) {
+            //         alert($(this).serialize());
+            //         console.log(res);
+            //         // $('#main').html(res);
+            //     }, 'json');
+            //     // return false;
+            // })
+        });
+    </script>
+</head>
+<body>
+    <nav>
+        <div id="brand"><h1>Cryptocurrency</h1></div>
+        <a href="">Finance Platforms</a>
+        <a href="">Exchanges</a>
+    </nav>
+    <div id="main"></div>
+    <div id="pagination">
+        <form action="/page" method="POST">
+            <input type="hidden" name="page" value="previous">
+            <input type="submit" value="Previous 10">
+        </form>
+        <form action="">
+            <input id="top" type="submit" value="List Top 100">
+        </form>
+        <form action="page">
+            <input type="hidden" name="page" value="next">
+            <input type="submit" value="Next 10">
+        </form>
+    </div>
+    
+</body>
+</html>

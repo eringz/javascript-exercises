@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        // $(document).ready(function(){
+        //     $('#peopleBtn').click(function(){
+        //         // let's make the request to our OWN server!
+        //         $.get('/people', function(data){
+        //         // log the data to be sure we have it before we dive into manipulating the DOM
+        //         console.log("got the data", data);
+        //         }, 'json');
+        //     });
+        // });
+
+        $(document).ready(function(){
+            let route = 'https://api.coingecko.com/api/v3/asset_platforms';
+            let count = 0;
+            // let route = "https://swapi.dev/api/people/?page=2";
+            $('#peopleBtn').click(function(){
+                $.get(route, function(data){
+                    console.log('got the data', data);
+                    // console.log('length:', data.length);
+                    for(let i = 0; i<data.length-1; i++){
+                        if(i < 100){
+                            count++;
+                            document.getElementById('posted').innerHTML += "<p>"+count+": "+data[i].id+"</p>";
+                        }else{
+                            return;
+                        }
+                    }
+                    // route = data.next;
+                },'json');
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <button id="peopleBtn">People</button>
+    <button id="posted"></button>
+</body>
+</html>

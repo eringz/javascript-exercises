@@ -1,0 +1,58 @@
+*{
+    color: #34C65C;
+    
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+    body{
+        background-color: #1E1E1F;
+    }
+        nav{
+            
+            border-bottom: 1px solid #34C65C;
+        }
+            div#brand{
+                display: inline-block;
+                margin: 0 20px;
+                width: 1250px;
+            }
+                h1{
+                    margin: 10px;
+                }
+                nav a{
+                    margin: 20px;
+                }
+        div#main{
+            display: inline-block;
+            padding: 10px;
+            margin: 40px 0 0 400px;
+            width: 800px;
+            min-height: 400px;
+            text-align: center;
+            border: 1px solid #34C65C;
+            border-radius: 5px;
+            color: #FFFFF1;
+        }
+        div#pagination{
+            display: inline-block;
+            padding: 10px;
+            margin: 0 400px;
+            width: 800px;
+            /* border: 1px solid #34C65C; */
+            border-radius: 5px;
+        }
+            #pagination form{
+                display: inline-block;
+                margin: 0 56px;
+                /* width: 200px; */
+            }
+                input{
+                    color: white;
+                    background-color: blue;
+                    width: 150px;
+                    padding: 12px 0;
+                    border: none;
+                    border-radius: 5px;;
+                }
+                #top{
+                    background-color: #34C65C;
+                }
