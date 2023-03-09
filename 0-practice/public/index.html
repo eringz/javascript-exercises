@@ -6,17 +6,24 @@
     <script type ="text/javascript">
         $(document).ready(function (){
     
-            const socket = io(); //1
-
-            socket.on('greeting', function (data) { //4
-                alert(data.msg);
-                console.log(data.msg); //5
-                socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' }); //6
+            /*
+                1 initially the client will request a web page from the server by connecting to our server via our port "localhost:1337". 
+                The server then sends back the index.html file as shown above. The script will run on the client's browser and connect to our server via sockets.
+            */
+            const socket = io(); 
+    
+            socket.on('greeting', function (data) { //4 The client's 'greeting' listener will then be triggered... 
+                alert(data.msg1); //5 and log the data sent via the message on our browser's console. 
+                /*
+                    6 Finally the client will emit a 'thank you' message to the server because 
+                        we included this emit within the callback of our 'greeting' listener.
+                */
+                socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' }); 
             });
          })
     </script>
 </head>
 <body>
-    <h1>Welcome Visitor</h1>  
+    <h1>Fun with sockets</h1>  
 </body>
 </html>

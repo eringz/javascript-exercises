@@ -1,27 +1,24 @@
 const express = require('express');
 const app = express();
-app.use(express.static(__dirname + "/public"));
+
+app.use(express.static(__dirname + '/public'));
+
 const server = app.listen(1337);
+
 const io = require('socket.io')(server);
-var counter = 0;
+let counter = 0;
 
-// app.set('views', __dirname + '/views');
-// app.set('view engine', 'ejs');
+//2 This triggers our server's connection listener to run, and this occurs for every new socket connection. 
+io.on('connection', function(socket){
 
 
-// app.get('/', function(req, res){
-//   res.render('index');
-// });
-    
-io.on('connection', function (socket) { //2
+  /*
+    3 Then the server will emit a message 'greeting' to the client, because we placed an emit event there. 
+  */
+  socket.emit('greeting', {msg : 'Greetings, from serv Node, brought to you by Sockets! - Server', msg1: 'hi'});
   
-  socket.emit('greeting', { msg: 'Greetings, from server Node, brought to you by Sockets! -Server' }); //3
-  socket.on('thankyou', function (data) { //7
-    console.log(data.msg); //8 (note: this log will be on your server's terminal)
+  //7 The server's listener with the matching 'thank you' label will be triggered...
+  socket.on('thank you', function(data){ //8 (note: this log will be on your server's terminal)
+    console.log(data.msg)
   });
-    
 });
-
-// app.listen(port = 8000, function(){
-//   console.log('Running in localhost at port '+ port);
-// })
