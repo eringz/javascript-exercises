@@ -9,21 +9,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            let route = 'https://api.coingecko.com/api/v3/exchanges?page=1&per_page=10';
-            let count = 0;
+            let route = 'https://api.coingecko.com/api/v3/asset_platforms?page=1&per_page=10';
+
             $.get(route, function(data){
-                    for(let i = 0; i<data.length-1; i++){
-                        if(i < 10){
-                            count++;
+                    for(let i=0; i<data.length-1; i++){
+                        if(i<10){
                             document.getElementById('main').innerHTML += "<p>"+data[i].id+"</p>";
-                        }else{
-                            return;
-                        }
+                        }   
                     }
             },'json');
 
-            $('#next').submit(function(){
-                $.get('/next', function(data){
+            $('form').submit(function(){
+                $.get($(this).attr('action'), function(data){
                     document.getElementById('main').innerHTML = "";
                     for(let i = 0; i<data.length-1; i++){
                         document.getElementById('main').innerHTML += "<p>"+data[i].id+"</p>";
@@ -32,33 +29,18 @@
                 return false;
             });
 
-            $('#previous').submit(function(){
-                $.get('/previous', function(data){
-                    document.getElementById('main').innerHTML = "";
-                    for(let i = 0; i<data.length-1; i++){
-                        document.getElementById('main').innerHTML += "<p>"+data[i].id+"</p>";
-                    }
-                }, 'json');
-                return false;
+            $('#exchange').click(function(){
+                console.log('dad');
+                // return false;
             });
-
-            $('#top').submit(function(){
-                $.get('/top', function(data){
-                    document.getElementById('main').innerHTML = "";
-                    for(let i = 0; i<data.length-1; i++){
-                        document.getElementById('main').innerHTML += "<p>"+data[i].id+"</p>";
-                    }
-                }, 'json');
-                return false;
-            });
-        });
+        });        
     </script>
 </head>
 <body>
     <nav>
         <div id="brand"><h1>Cryptocurrency</h1></div>
-        <a href="">Finance Platforms</a>
-        <a href="">Exchanges</a>
+        <a href="/platform">Finance Platforms</a>
+        <a id="exchange" href="/exchange">Exchanges</a>
     </nav>
     <div id="main"></div>
     <div id="pagination">

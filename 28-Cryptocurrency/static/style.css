@@ -13,7 +13,7 @@
             div#brand{
                 display: inline-block;
                 margin: 0 20px;
-                width: 1250px;
+                width: 1200px;
             }
                 h1{
                     margin: 10px;
@@ -26,11 +26,12 @@
             padding: 10px;
             margin: 40px 0 0 400px;
             width: 800px;
-            min-height: 400px;
+            height: 400px;
             text-align: center;
             border: 1px solid #34C65C;
             border-radius: 5px;
             color: #FFFFF1;
+            overflow: auto;
         }
         div#pagination{
             display: inline-block;
