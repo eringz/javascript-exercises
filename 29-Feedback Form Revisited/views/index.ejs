@@ -10,23 +10,52 @@
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            const socket = io();//1
+            const socket = io();
+            var str = ""
 
+            /*
+                DOCU: Perform a socket emission instead of form submission
+                OWNER: Ron Garcia Santos
+            */
+            $("#submit").click(function(){
+               
+                socket.emit('posting_form', {
+                    name: $('#name').val(),
+                    course: $('#course').val(),
+                    score: $('#score').val(),
+                    reason: $('#reason').val()
+                });
+                return false;
+            });
+
+            /*
+                DOCU: Listen to server emission and display to message div
+                OWNER: Ron Garcia Santos
+            */
+            socket.on('updated_message', function(data){
+                console.log('Server:',data);
+                document.getElementById('message').innerHTML += "<p>"+data+"</p>";
+
+            });
+            socket.on('id_number', function(data){
+                document.getElementById('message').innerHTML += "<p>"+data+"</p>";
+            });
         });
     </script>
 </head>
 <body>
-    <form action="posting_form" method="POST">
+    <div id="message"></div>
+    <form action="/result" method="POST">
         <h1>Feeback Form</h1>
-        <input type="text" name="name" placeholder="Your Name(optional)">
+        <input type="text" id="name" name="name" placeholder="Your Name(optional)">
         <label>Course Title:</label>
-        <select name="course" id="course">
+        <select id="course" name="course" id="course">
             <option value="Web Fundamentals">Web Fundamentals</option>
             <option value="PHP Track">PHP Track</option>
             <option value="JS Track">JS Track</option>
         </select>
         <label>Given Score(1-10):</label>
-        <select name="score" id="">
+        <select id="score" name="score" id="">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -38,8 +67,8 @@
             <option value="9">9</option>
             <option value="10">10</option>
         </select>
-        <textarea name="reason" placeholder="Reason" id="" cols="55" rows="5"></textarea>
-        <input type="submit" value="Submit" id="submit">
+        <textarea id="reason" name="reason" placeholder="Reason" id="" cols="55" rows="5"></textarea>
+        <input id ="submit" type="submit" value="Submit" id="submit">
     </form>
 </body>
 </html>    

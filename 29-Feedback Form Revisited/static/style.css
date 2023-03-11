@@ -4,6 +4,15 @@
     body{
         margin: 0;
     }
+        #message{
+            margin: 20px auto;
+            padding: 20px;
+            width: 500px;
+            border: 1px solid green;
+        }
+            #message p{
+                margin: 10px 0;
+            }
         form{
             margin: 20px auto;
             padding: 20px;

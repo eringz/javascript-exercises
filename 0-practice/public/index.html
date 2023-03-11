@@ -12,7 +12,7 @@
             */
             const socket = io(); 
     
-            socket.on('greeting', function (data) { //4 The client's 'greeting' listener will then be triggered... 
+            socket.on('alpha', function (data) { //4 The client's 'greeting' listener will then be triggered... 
                 alert(data.msg1); //5 and log the data sent via the message on our browser's console. 
                 /*
                     6 Finally the client will emit a 'thank you' message to the server because 
@@ -25,5 +25,8 @@
 </head>
 <body>
     <h1>Fun with sockets</h1>  
+    <!-- <form action="" method="POST">
+
+    </form> -->
 </body>
 </html>

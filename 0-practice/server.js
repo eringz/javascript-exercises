@@ -1,24 +1,23 @@
 const express = require('express');
 const app = express();
-
-app.use(express.static(__dirname + '/public'));
-
+     
+// ...other middleware...
+     
 const server = app.listen(1337);
-
 const io = require('socket.io')(server);
-let counter = 0;
-
-//2 This triggers our server's connection listener to run, and this occurs for every new socket connection. 
-io.on('connection', function(socket){
-
-
-  /*
-    3 Then the server will emit a message 'greeting' to the client, because we placed an emit event there. 
-  */
-  socket.emit('greeting', {msg : 'Greetings, from serv Node, brought to you by Sockets! - Server', msg1: 'hi'});
+    
+io.on('connection', function (socket) { 
   
-  //7 The server's listener with the matching 'thank you' label will be triggered...
-  socket.on('thank you', function(data){ //8 (note: this log will be on your server's terminal)
-    console.log(data.msg)
+  socket.on('alpha', function (data) { 
+    // socket.emit will respond back to the socket client that triggered this 'alpha' listener
+    socket.emit('updateClient', { data: 5 });
+  });
+  socket.on('beta', function (data) { 
+    // io.emit will message all socket clients 
+    io.emit('updateAllClients', { data: 5 });
+  });
+  socket.on('gamma', function (data) { 
+    // socket.broadcast will message all socket clients except the one that triggered the 'gamma' listener
+    socket.broadcast.emit('updateAllExceptOne', { data: 5 });
   });
 });
