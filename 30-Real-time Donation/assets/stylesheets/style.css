@@ -1,0 +1,34 @@
+*{
+    color: #34C65C;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;;
+}
+    body{
+        background-color: #1E1E1F;
+    }
+        #donation{
+            padding: 20px;
+            margin: 40px auto;
+            width: 500px;
+            border: 1px solid white;
+            border-radius: 3px;
+        }
+            p{
+                color: white;
+            }
+            form{
+                display: inline-block;
+                margin: 40px;
+            }
+                input{
+                    padding: 7px 40px;
+                    border: none;
+                    border-radius: 3px;
+                    color: white;
+                }
+                #donate{
+                    background-color: blue;
+                }
+                #redeem{
+                    background-color: red;
+                }
