@@ -8,3 +8,17 @@
     7. We need to have the client LISTEN for an event called 'disconnect_user' and remove any html box associated with this user.
 
 */
+const express = require('express');
+const app = express();
+
+app.use(express.static(__dirname + '/static'));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+app.get('/',function(req, res){
+    res.render('index');
+});
+
+const server = app.listen(port = 8000, function(){
+    console.log('Running in localhost at port '+port);
+});

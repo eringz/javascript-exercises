@@ -1,23 +1,41 @@
+/*
+    1. Have the NodeJS server render views/index.ejs that has the html content for the client whenever the client requests "/" 
+    2. In the client codes, have a javascript code that asks the user for their name. Store the user input in a variable called name
+    3. Have the client EMIT to the server an event called "got_a_new_user" and pass 'name' to the server.
+    4. Have the server LISTEN for an event called "got_a_new_user". When this event gets triggered, have the server BROADCAST an event called 'new_user' to the client with the name of the new user attached to the event.
+    5. Have the client LISTEN for an event called 'new_user' and when this event gets triggered, have jQuery render a new box with the new user's name.
+    6. Wait... But this does not detect when a user disconnects from the socketIO connection. To do this, we need to have the server LISTEN for an event called 'disconnect' and when this event gets triggered, broadcast an event called 'disconnect_user' to all clients.
+    7. We need to have the client LISTEN for an event called 'disconnect_user' and remove any html box associated with this user.
+
+*/
 const express = require('express');
 const app = express();
-     
-// ...other middleware...
-     
-const server = app.listen(1337);
+
+app.use(express.static(__dirname + '/static'));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+app.get('/',function(req, res){
+    res.render('index');
+});
+
+const server = app.listen(port = 8000, function(){
+    console.log('Running in localhost at port '+port);
+});
+
 const io = require('socket.io')(server);
-    
-io.on('connection', function (socket) { 
-  
-  socket.on('alpha', function (data) { 
-    // socket.emit will respond back to the socket client that triggered this 'alpha' listener
-    socket.emit('updateClient', { data: 5 });
-  });
-  socket.on('beta', function (data) { 
-    // io.emit will message all socket clients 
-    io.emit('updateAllClients', { data: 5 });
-  });
-  socket.on('gamma', function (data) { 
-    // socket.broadcast will message all socket clients except the one that triggered the 'gamma' listener
-    socket.broadcast.emit('updateAllExceptOne', { data: 5 });
-  });
+
+
+
+io.on('connection', function(socket){
+    var users = [];
+    socket.on('got_a_new_user', function(req){
+        console.log('server listen to: ', req.name);
+        
+        socket.emit('new_user', {new_user_name: req.name});
+        
+
+        users.push({name: req.name, id: 1}) ;
+    });
+    io.emit('existing_user')
 });
