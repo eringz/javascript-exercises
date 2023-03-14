@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Color Theme</title>
+        <link rel="stylesheet" href="/stylesheet/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script type ="text/javascript">
+            $(document).ready(function (){
+        
+                //2. have a io connection called socket .     
+                const socket = io(); 
+
+                //3. Have a jquery click event, when clicking an submit button determine the corresponding parent(form) action and store it in variable action.
+                $('.color').click(function(){
+                    let action = $(this).parent().attr('action');
+                    //4. Have a client emit event name 'action' with a parameter action chosen by a user.
+                    socket.emit('chosen_action', {action : action});
+                    return false;  
+                });
+
+                //6. Have a client listen to event 'background_color' and convert it to body background of all users within the socket.
+                socket.on('background_color', function(data){
+                    document.body.style.backgroundColor = data.color;
+                });
+
+             })
+        </script>
+    </head>
+    <body>
+        <div id="container">
+            <form action="light" method="POST">
+                <input class="color" type="submit" value="Light mode">
+            </form>
+            <form action="random" method="POST">
+                <input class="color" type="submit" value="Random mode">
+            </form>
+            <form action="dark" method="POST">
+                <input class="color" type="submit" value="Dark mode">
+            </form>
+        </div>
+    </body>
+</html>

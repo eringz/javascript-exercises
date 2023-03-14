@@ -10,10 +10,18 @@
 */
 const express = require('express');
 const app = express();
+var session = require('express-session');   
 
 app.use(express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+app.use(session({
+  secret: 'keyboardkitteh',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }
+}));
+
 
 app.get('/',function(req, res){
     res.render('index');
@@ -28,14 +36,13 @@ const io = require('socket.io')(server);
 
 
 io.on('connection', function(socket){
+    
     var users = [];
     socket.on('got_a_new_user', function(req){
         console.log('server listen to: ', req.name);
-        
+        console.log('session id: '+ req.session.id);
         socket.emit('new_user', {new_user_name: req.name});
-        
-
         users.push({name: req.name, id: 1}) ;
     });
-    io.emit('existing_user')
+    io.emit('existing_user', {users: users});
 });

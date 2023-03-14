@@ -1,0 +1,18 @@
+*{
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;;
+}
+    form{
+        /* background-color: aqua; */
+        display: inline-block;
+        padding: 20px;
+        margin: 20px auto;
+        width: 200px;
+    }
+        input{
+            background-color: blue;
+            color: white;
+            padding: 7px 30px;
+            border: none;
+            border-radius: 3px;
+        }
