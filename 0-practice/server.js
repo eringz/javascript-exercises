@@ -18,10 +18,10 @@
         </script>
 
     4. Have the server LISTEN for an event called "got_a_new_user". When this event gets triggered, 
-    4.1have the server BROADCAST an event called 'new_user' to the client with the name of the new user attached to the event.
-        app.io.route('got_a_new_user', function(req){
-            app.io.broadcast('new_user', {new_user_name: req.data.name});
-        });
+    4.1. Have the server BROADCAST an event called 'new_user' to the client with the name of the new user attached to the event.
+            app.io.route('got_a_new_user', function(req){
+                app.io.broadcast('new_user', {new_user_name: req.data.name});
+            });
     4.2 we store the name/session_id of the new user in a variable/array/hash called users;
         
         var users = {};
@@ -54,10 +54,28 @@ app.use(express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-const server = app.listen(8000);
+const server = app.listen(8000, () => {console.log('Running in localhost at port 8000');});
 
 app.get('/', function(req, res){
     res.render('index', {});
 });
+
+var io = require('socket.io')(server);
+
+var users = [];
+
+io.on('connection', function(socket){
+    socket.on("got_a_new_user", function(req){
+        users.push({name: req.name, session_id: socket.id});
+        io.emit('new_user', {new_user_name: req.name});
+        return users;
+    });
+
+    io.emit('existing_users', {users: users});
+    
+});
+
+
+
 
 
