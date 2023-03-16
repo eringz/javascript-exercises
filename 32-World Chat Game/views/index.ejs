@@ -20,31 +20,29 @@
                 connected = true
             }
 
+
             socket.on('existing_user', function(data){
                 let str = ``;
                 for(let i=0; i<data.length; i++){
-                    str += `<p class="user">${data[i].id} || ${data[i].name}</p>`
+                    str += `<p class="user">Server: ${data[i].name} join the group</p>`
                 }
-                document.getElementById('online-users').innerHTML = str;  
+                document.getElementById('content').innerHTML += str;  
             });
 
             socket.emit('got_a_new_user', {name: name});
 
             $(document).on('click', '#submit', function(){
                 let message = $(message).val();
-                console.log(name);
+                console.log(message);
                 return false;
             });
+            
         });
     </script>
 </head>
 <body>
     <h1>Gues the Word:</h1>
     <h2>s _ _ _ e _</h2>
-    <div id="online">
-        <p id="head">Online</p>
-        <div id="online-users"></div>
-    </div>
     <div id="content">
 
     </div>

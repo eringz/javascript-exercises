@@ -41,15 +41,16 @@ app.get('/', function(req, res){
 });
 
 
-var users = [
-];
+var users = [];
 io.on('connection', function(socket){
     io.emit('existing_user', users);
     socket.on('got_a_new_user', function(req){
-        users.push({name: req.name, id: socket.id});
+        if(req.name != null){
+            users.push({name: req.name, id: socket.id});
+        }
+        
         io.emit('existing_user', users);
-    });
-    
-});
 
+    });    
+});
 

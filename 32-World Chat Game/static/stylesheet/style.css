@@ -51,10 +51,15 @@
                 color: black;
             }
             input{
-                background-color: blue;
+                
                 border: none;
                 padding: 7px 20px;
+                
+            }
+            #submit{
+                background-color: blue;
                 border: none;
                 border-radius: 3px;
-                margin-left: 710px;
+                margin-left: 720px;
+                margin-top: 10px;
             }
