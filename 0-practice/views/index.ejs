@@ -14,21 +14,24 @@
             if(name != ""){
                 socket.emit("got_a_new_user", {name: name});
                
-                socket.on("new_user", function(req){
-                    new_user = req.new_user_name;
-                    console.log('new_user:', new_user);
-                    let str = `Server: ${req.new_user_name} has joined the group`;
-                    document.getElementById('announcement').innerHTML = str;
-                });
+                
             }
+
+            console.log('new_user:', new_user);
 
             socket.on("existing_users", function(req){
                 let str = ``;
-                for(let i=0; i<req.users.length-1; i++){
+                for(let i=0; i<req.users.length; i++){
                     console.log(req.users.name);
                     str += `<div class="chatbox"><h2>${req.users[i].name}</h2></div>`
                 }
                 document.getElementById('group').innerHTML = str;
+            });
+
+            socket.on("new_user", function(req){
+                let str = ``;
+                str = `<div class="chatbox"><h2>${req.new_user_name}</h2></div>`
+                document.getElementById('group').innerHTML += str;
             });
 
         });
