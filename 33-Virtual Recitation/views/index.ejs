@@ -4,50 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Broadcast Example</title>
+    <title>Virtual Recitation</title>
     <link rel="stylesheet" href="/stylesheet/style.css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/socket.io./socket.io.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            
-            const socket = io();
-            var name = prompt('Enter your name');
-            const content = document.getElementById('content');  
-
-            socket.emit('got_a_new_user', {name: name});
-            socket.on('new_user', function(data){
-                let str = `<p class="user">Server: ${data.user_name} join the group</p>`;
-                content.innerHTML += str;  
+            $(document).ready(function(){
+                const socket = io();
+                const content = document.getElementById('content');
+                socket.on('present_id', function(data){
+                    $("#content").append(`<p>Socket id ${data.id} is present</p>`);
+                });
+                
+                $('#submit').click(function(){
+                    socket.on('present_id', {id: socket.id});
+                    return false;
+                });
             });
-
-            socket.on('guess_result', function(data){
-                let str = `<p style="color:${data.color}" class="user">${data.result}</p>`;
-                content.innerHTML += str;  
-            });
-
-            $(document).on('click', '#submit', function(){
-                var word = $('#word').val();
-                console.log(name);
-                socket.emit('word_guess', {name: name, word: word});
-                $('#word').val('');
-                return false;
-            });
-            
-        });
     </script>
 </head>
 <body>
-    <h1>Gues the Word:</h1>
-    <h2>s _ _ _ e _</h2>
-    <div id="content">
-
-    </div>
-    <form action="" method="POST">
-        <input id="word" type="text">
-        <input id="submit" type="submit" value="Submit">
-    </form>
+    <div class="container">
+        <form action="" method="POST">
+            <input type="submit" value="Raise Hand" id="submit">
+        </form>
+        <div id="content">
+        </div>
+    </div>    
 </body>
 </html>

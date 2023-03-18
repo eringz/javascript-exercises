@@ -45,22 +45,12 @@ app.get('/', function(req, res){
     res.render('index');
 });
 
+// io.on('connection', function(socket){
+//     io.emit('present_id', {id: socket.id});
+// });
 
-var users = [];
-io.on('connection', function(socket){
-    socket.on('got_a_new_user', function(req){
-        console.log(socket.id);
-        socket.broadcast.emit('new_user', {user_name: req.name, user_id: socket.id});
-    });   
-    
-    socket.on('word_guess', function(req){
-        console.log(req);
-        var word = "screen";
-        if(word == req.word){
-            io.emit('guess_result', {result: `${req.name} guessed the word`, color: 'blue'});
-        }else{
-            io.emit('guess_result', {result: `${req.name}: ${req.word}`, color: 'white'});
-        }
-    });
+io.on('connection', function (socket) {
+    socket.on("eventName", function(){
+        console.log(socket.id);    
+    })
 });
-
