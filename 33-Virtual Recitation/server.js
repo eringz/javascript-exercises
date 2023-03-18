@@ -45,7 +45,7 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
     console.log(`${socket.id} is connected`);
-    let result = `Socket id ${req.id} is present`;  
+    let result = `Socket id ${socket.id} is present`;  
     io.emit('present_user', {result: result});
 
     socket.on("raise_hand", function(req){

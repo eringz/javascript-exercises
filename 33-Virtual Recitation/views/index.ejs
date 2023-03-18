@@ -10,19 +10,15 @@
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
             $(document).ready(function(){
+                
                 const socket = io();
+                const url = ['present_user', 'user_raise_hand', 'disconnected_user'];
 
-                socket.on('present_user', function(data){
-                    $('#content').append(`<p>${data.result}</p>`);
-                });
-
-                socket.on('user_raise_hand', function(data){
-                    $('#content').append(`<p>${data.result}</p>`)
-                });
-
-                socket.on('disconnected_user', function(data){
-                    $('#content').append(`<p>${data.result}</p>`)
-                });
+                for(let i=0; i<url.length; i++){
+                    socket.on(url[i], function(data){
+                        $('#content').append(`<p>${data.result}</p>`);
+                    });
+                }
 
                 $('#submit').click(function(){
                         socket.emit('raise_hand', {id: socket.id});
