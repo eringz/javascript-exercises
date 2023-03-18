@@ -1,24 +1,22 @@
 /*
-    1. Have a render file 'index.ejs' for root('/') routing of client. If the user has not filled out the name before, 
-        have a js prompt('Enter your name') and store a variable as name.
-            test socket.id as session id.
+    1. Have a render file 'index.ejs' for root('/') routing of client and connect user using socket.
 	
-    2. Have a socket setup and connection for all users. 
+    2. Have a server broadcast emit to all clients event name 'present_user'. 
         
-    3. Have an client emit event name 'got_a_new_user' with a parameter of name.
+    3. Have all online client listen to event name 'present_user' with a parameter of result and append p tag html with result data.
 
-    4. Have a server listen to event name 'got_a_new_user' and with request name.
-        4.1 Have a server Broadcast EMIT to all clients event name 'new_user' with parameters of name as username and socket.id as user_id.
+    4. Have a client click submit button of raise hand.
+        4.1. Have a client emit  event name 'raise_hand' with a parameter of user own socket id as id.
     
-    5. Have a client listen to event 'new_user' and render a p tag with string of 'Server: username join the group'.
+    5. Have a server listens to event 'raise_hand' with parameter id and store it in result variable'.
+        5.1. Have a server broadcast emit event name 'user_raise_hamd' to all clients online.
 
-    6. Have a submit form of message  and ah guessing word in client and make a client emit for event name 'word_guess'
+    6. Have all client online listens listen to event name 'user_raise_hand and append the result data to content id of a div rendered'
 
-    7. Have a server listen to event 'word_guess' and make a condition of word and request word submitted by form.
-        7.1 if submitted word is same as the guess word, have a server Broadcast EMIT to all clients the result of req.name guessed the word message.
-        7.2 else have a server Broadcast EMIT 'guess_result' to all clients the result of req.name: request word message.
+    7. Have a server listen to event 'disconnect' store result variable the disconnected socket id.
+        7.1 Have a server broadcast emit event name 'disconnected_user' to only online clients excluding the disconnected client and store to result paramater.
     
-    8. Have a client listen to event 'guess_result' and add render to a p tag in #content id of division
+    8. Have all online clients listen to event name 'disconnected_user' and fetch result data to append in content id of a div rendered.
 */
 const express = require('express');
 const app = express();
@@ -46,12 +44,25 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-    io.emit('present_id', {id: socket.id});
+    console.log(`${socket.id} is connected`);
+    let result = `Socket id ${req.id} is present`;  
+    io.emit('present_user', {result: result});
 
     socket.on("raise_hand", function(req){
         console.log('raise_hand',req);  
         let result = `Socket id ${req.id} is raise hand!`;  
         io.emit('user_raise_hand', {result: result});
     })
+
+    socket.on('disconnect', function(){
+        console.log(`${socket.id} is disconnected`);
+        let result = `Socket id ${socket.id} left`;
+        socket.broadcast.emit('disconnected_user', {result: result});
+    });
+
 });
+
+
+
+
 
