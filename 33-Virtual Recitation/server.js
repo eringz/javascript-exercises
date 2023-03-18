@@ -45,12 +45,13 @@ app.get('/', function(req, res){
     res.render('index');
 });
 
-// io.on('connection', function(socket){
-//     io.emit('present_id', {id: socket.id});
-// });
+io.on('connection', function(socket){
+    io.emit('present_id', {id: socket.id});
 
-io.on('connection', function (socket) {
-    socket.on("eventName", function(){
-        console.log(socket.id);    
+    socket.on("raise_hand", function(req){
+        console.log('raise_hand',req);  
+        let result = `Socket id ${req.id} is raise hand!`;  
+        io.emit('user_raise_hand', {result: result});
     })
 });
+

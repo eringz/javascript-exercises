@@ -11,15 +11,26 @@
     <script type="text/javascript">
             $(document).ready(function(){
                 const socket = io();
-                const content = document.getElementById('content');
-                socket.on('present_id', function(data){
-                    $("#content").append(`<p>Socket id ${data.id} is present</p>`);
-                });
+                // const content = document.getElementById('content');
                 
-                $('#submit').click(function(){
-                    socket.on('present_id', {id: socket.id});
-                    return false;
+                socket.on('present_id', function(data){
+                    $('#content').append(`<p>Socket id ${data.id} is present</p>`);
                 });
+
+                socket.on('user_raise_hand', function(data){
+                    $('#content').append(`<p>${data.result}</p>`)
+                });
+
+                $('#submit').click(function(){
+                        socket.emit('raise_hand', {id: socket.id});
+                        console.log('clicked submit');
+                        return false;
+                });
+
+
+
+
+                
             });
     </script>
 </head>
