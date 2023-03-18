@@ -9,30 +9,43 @@
 
             var name = prompt('What is your name');
             const socket = io.connect();
-            var new_user = "";
+            var session_id = "";
 
-            if(name != ""){
-                socket.emit("got_a_new_user", {name: name});
-               
+            console.log(socket);
+
+            socket.emit("got_a_new_user", {name: name});
+
+            // socket.on('existing_users',function(data){
+            //     let str = ``;
                 
-            }
-
-            console.log('new_user:', new_user);
-
-            socket.on("existing_users", function(req){
-                let str = ``;
-                for(let i=0; i<req.users.length; i++){
-                    console.log(req.users.name);
-                    str += `<div class="chatbox"><h2>${req.users[i].name}</h2></div>`
-                }
-                document.getElementById('group').innerHTML = str;
-            });
+            //     for(let i=0; i<data.length; i++){
+            //         str += `<div class="chatbox" id="${data[i].session_id}"><h2>${data[i].name} </h2></div>`
+            //     }
+            //     document.getElementById('group').innerHTML = str;
+            // });
 
             socket.on("new_user", function(req){
-                let str = ``;
-                str = `<div class="chatbox"><h2>${req.new_user_name}</h2></div>`
+                
+                console.log('user socket id:', req.id);
+                console.log('conncected', socket.connected);
+                let str = `<div class="chatbox" id="${req.session_id}"><h2>${req.new_user_name} </h2></div>`;
                 document.getElementById('group').innerHTML += str;
+                // if(socket.id && socket.connected == FALSE ){
+                //     console.log('there is disconnection');
+                //     socket.emit('disconnected_socket', {session_id: socket.id})
+                // }else{
+                //     console.log('user is online');
+                // }
             });
+            socket.on('session_id', function(data){
+                console.log('this socket:', data.session_id);
+            });
+            
+
+            // socket.on('disconnected_user', function(req){
+            //     document.getElementById(`${req.session_id}`).remove();
+            //     console.log(req.id+' is disconnected');
+            // });
 
         });
     </script>

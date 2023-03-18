@@ -56,24 +56,45 @@ app.set('view engine', 'ejs');
 
 const server = app.listen(8000, () => {console.log('Running in localhost at port 8000');});
 
-app.get('/', function(req, res){
-    res.render('index', {});
-});
+let counter = 0;
 
 var io = require('socket.io')(server);
-
 var users = [];
 
-io.on('connection', function(socket){
-    socket.on("got_a_new_user", function(req){
-        users.push({name: req.name, session_id: socket.id});
-        io.emit('new_user', {new_user_name: req.name});
-        return users;
-    });
-
-    io.emit('existing_users', {users: users});
+app.get('/', function(req, res){
     
+    
+    res.render('index');
 });
+
+io.on('connection', function(socket){
+    console.log('online socket_id:', socket.id);
+    // console.log('socket count:', users.length);
+    socket.on('got_a_new_user', function(req){
+        // counter++;
+        console.log(`${socket.connected} ${users.length}. ${req.name} socket_id:`, socket.id);
+        users.push({session_id: socket.id,name: req.name});
+        console.log('all_users:', users);
+        io.emit('new_user', {new_user_name: req.name, id: socket.id});
+        socket.emit('existing_users', users);
+    });
+    socket.emit('session_id', {session_id: socket.id});
+});
+
+// io.disconnect('disconnected_socket', function(req){
+//     console.log('discon', req);
+// });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
