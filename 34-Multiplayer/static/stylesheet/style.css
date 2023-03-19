@@ -1,44 +1,124 @@
 body{
-    background-color:black;
-    background-image: url("/images/background_blanka.gif");
-    background-repeat: no-repeat, repeat;
-    background-size: cover;
+    /* background-color:black; */
+    margin: 0;
 }
-#background{
-    width: 800px;
-    height:260px;
-    background: url('background_blanka.gif');
-    background-size: cover;
-}
+    #container{
+        background-image: url('/images/background.gif');
+        background-position: -850px -180px;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        position:absolute;
+    }
+        #nav{
+            border: 1px solid green;
+            width: 100%;
+            height: 100%;
+        }
+            #player1{
+                text-align: center;
+                color: green;
+                padding: 0 5px;
+                width: 40%;
+                height: 100%;
+            }
+        #hero{
+            background: url('/images/1942.gif');
+            background-position: -85px -180px;
+            width:28px;
+            height:28px;
+            position:absolute;
+        }
+        .enemy1{
+            background: url('/images/1942.gif');
+            background-position: 0 -10px;
+            width:28px;
+            height:28px;
+            position:absolute;
+        }
+        .enemy2{
+            background: url('/images/1942.gif');
+            background-position: -30px -10px;
+            width:28px;
+            height:28px;
+            position:absolute;
+        }
+        .enemy3{
+            background: url('/images/1942.gif');
+            background-position: -60px -10px;
+            width:28px;
+            height:28px;
+            position:absolute;
+        }
+        .enemy4{
+            background: url('/images/1942.gif');
+            background-position: -90px -10px;
+            width:28px;
+            height:24px;
+            position:absolute;
+        }
+        .enemy5{
+            background: url('/images/1942.gif');
+            background-position: -120px -10px;
+            width:28px;
+            height:24px;
+            position:absolute;
+        }
+        .enemy6{
+            background: url('/images/1942.gif');
+            background-position: -150px -10px;
+            width:28px;
+            height:24px;
+            position:absolute;
+        }
+        .enemy7{
+            background: url('/images/1942.gif');
+            background-position: -180px -10px;
+            width:28px;
+            height:24px;
+            position:absolute;
+        }
+        .bullet{
+            background: url('/images/1942.gif');
+            background-position: -185px -400px;
+            width:18px;
+            height:18px;
+            position:absolute;
+        }
+        #players{
+            position:absolute;
+            border: 1px solid green;
+            top:20px;
+            left: 700px;
+            /* background-color:white; */
+            padding:10px;
+            width: 80px;
+            font-size:30px;
+            text-align: center;
+            font-family: Arial;	
+        }
+        /* mobile */
+        @media only screen and (max-width: 480px) {
 
-#character1{
-    background: url('ken.png') 0px -80px;
-    width:70px;
-    height:80px;
-    position:absolute;
-}
-#character2{
-    background: url('ken.png') -70px -160px;
-    width:70px;
-    height:80px;
-    position:absolute;
-    transform: scaleX(-1);
-}
-#healthbar1{
-    width:200px;
-    height:15px;
-    background-color:lightgreen;
-    border:3px solid green;
-    position:absolute;
-    top:30px;
-    left:25px;
-}
-#healthbar2{
-    width:200px;
-    height:15px;
-    background-color:pink;
-    border:3px solid red;
-    position:absolute;
-    top:30px;
-    left:325px;
-}
+       }
+       /* tablet */
+       @media only screen and (min-width: 481px) {
+        #container{
+            background-image: url('/images/background.gif');
+            background-size: cover;
+            /* width: 100%; */
+            position:absolute;
+            overflow: none;
+        }
+            #nav{
+                background-color: black;
+                border: 1px solid green;
+                width: 99.7%;
+                height: 7%;
+            }
+
+       }
+       /* desktop */
+       @media only screen and (min-width: 1024px) {
+
+       }
