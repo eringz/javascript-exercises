@@ -1,3 +1,6 @@
+*{
+    color: green;
+}
 body{
     /* background-color:black; */
     margin: 0;
@@ -21,13 +24,25 @@ body{
                 padding: 0 5px;
                 width: 40%;
                 height: 100%;
+                
             }
-        #hero{
+        #player1{
+            background: url('/images/1942.gif');
+            background-position: -85px -180px;
+            width:19px;
+            height:28px;
+            position:absolute;
+            top: 90%;
+            left: 20%
+        }
+        #player2{
             background: url('/images/1942.gif');
             background-position: -85px -180px;
             width:28px;
             height:28px;
             position:absolute;
+            top: 90%;
+            left: 80%
         }
         .enemy1{
             background: url('/images/1942.gif');

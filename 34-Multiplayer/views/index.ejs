@@ -12,23 +12,15 @@
         <script type="text/javascript">
             window.onload = (event) => {
                 const socket = io();
-
+                var players = [];
+                var count = 1;
                 socket.on('online_player', function(data){
-                    console.log(data.length);
-                    // for(let i=0; i<data.lenght)
-
+                    if(players.length > 2){
+                        players.push(new Player(data.id));
+                    }
+                    $('#container').append(`<div id='player${count}'></div>`);
+                    count++
                 });
-                
-
-                var player = new Player();
-                /* OOP  */
-                
-                function gameLoop(){
-                    player.display();
-                }
-
-                setInterval(gameLoop, 100);
-                
             };
         </script>
     </head>
@@ -38,7 +30,7 @@
 
             <div id='container'>
                 <div id="nav"></div>
-                <div id='hero'></div>
+                <!-- <div id='player'></div> -->
                 <div id='enemies'></div>
                 <div id='bullets'></div>	
             </div>

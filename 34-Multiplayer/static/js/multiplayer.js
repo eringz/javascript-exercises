@@ -1,13 +1,10 @@
 class Player
 {
-    constructor(){
+    constructor(id){
         this.x = 50;
         this.y = 90
         this.movement();
-    }
-    display(){
-        document.getElementById('hero').style['top'] = this.y + "%";
-        document.getElementById('hero').style['left'] = this.x + "%";
+        this.id = id;
     }
     movement(hero){
         document.onkeydown = (e) => {

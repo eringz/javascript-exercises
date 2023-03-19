@@ -47,7 +47,7 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
     // console.log(`${socket.id} is connected`);
-    io.emit('online_player', {id: socket.id} )
+    io.emit('online_player', {id: socket.id} );
     // socket.on('disconnect', function(){
     //     console.log(`${socket.id} is disconnected`);
     // })
