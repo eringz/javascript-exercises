@@ -8,61 +8,29 @@
         <link rel="stylesheet" href="/stylesheet/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="/js/multiplayer.js"></script>
-        <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
         <script type="text/javascript">
             window.onload = (event) => {
+                const socket = io();
+
+                socket.on('online_player', function(data){
+                    console.log(data.length);
+                    // for(let i=0; i<data.lenght)
+
+                });
                 
 
-
-
-
-
-
-
-
-                /*  */
-                var hero = new Hero();
-                hero.movement(); 
-                // document.onkeydown = function(e){
-                //     var audio = document.getElementById("main_audio");
-
-                //     audio.play();
-
-                //     if(e.keyCode == 38){
-                //         // console.log(e);
-                //         if(hero.y > 7){
-                //             hero.y -= 1;
-                //         }
-                //     }else if(e.keyCode == 40){
-                //         if(hero.y < 94.5){
-                //             hero.down();
-                //         }
-                //     }else if(e.keyCode == 37){
-                //         if(hero.x > 1){
-                //             hero.left();
-                //         }
-                //     }else if(e.keyCode == 39){
-                //         if(hero.x < 94.5){
-                //             hero.right();
-                //         }
-                //     }
-                //     if(e.keyCode == 32){
-                //         var audio = document.getElementById("bullet_audio");
-                //         audio.play();
-                //         bullets.push({x: hero.x+.75, y: hero.y-2});
-                //         displayBullets();
-                //     }
-                // }
-
+                var player = new Player();
+                /* OOP  */
+                
                 function gameLoop(){
-                    hero.display();
+                    player.display();
                 }
 
                 setInterval(gameLoop, 100);
                 
             };
         </script>
-        
     </head>
     <body>
             <audio src="/audio/nikki.mp3" id="main_audio" loop="loop"></audio>

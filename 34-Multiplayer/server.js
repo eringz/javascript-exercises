@@ -22,17 +22,17 @@
 */
 const express = require('express');
 const app = express();
-var session = require('express-session');   
+var session = require('express-session');  
 
 app.use(express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-app.use(session({
-    secret: 'keyboardkitteh',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 }
-}));
+// app.use(session({
+//     secret: 'keyboardkitteh',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { maxAge: 60000 }
+// }));
 
 const server = app.listen(port = 8000, function(){
     console.log('Running in localhost at port '+port);
@@ -45,5 +45,10 @@ app.get('/', function(req, res){
     res.render('index');
 });
 
-
-
+io.on('connection', function(socket){
+    // console.log(`${socket.id} is connected`);
+    io.emit('online_player', {id: socket.id} )
+    // socket.on('disconnect', function(){
+    //     console.log(`${socket.id} is disconnected`);
+    // })
+});

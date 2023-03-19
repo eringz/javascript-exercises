@@ -1,31 +1,33 @@
-class Hero
+class Player
 {
     constructor(){
         this.x = 50;
         this.y = 90
+        this.movement();
     }
     display(){
         document.getElementById('hero').style['top'] = this.y + "%";
         document.getElementById('hero').style['left'] = this.x + "%";
     }
     movement(hero){
-        var y = this.y;
-        document.onkeydown = function(e){
+        document.onkeydown = (e) => {
+            var audio = document.getElementById('main_audio');
+            audio.play();
             if(e.keyCode == 38){
-                if(y > 7){   
-                    y -= 1;
+                if(this.y > 7){   
+                    this.y -= 1;
                 }
-                console.log(y);
+                
             }else if(e.keyCode == 40){
-                if(hero.y < 94.5){
+                if(this.y < 94.5){
                     this.y += 1;
                 }
             }else if(e.keyCode == 37){
-                if(hero.x > 1){
+                if(this.x > 1){
                     this.x -= 1;
                 }
             }else if(e.keyCode == 39){
-                if(hero.x < 94.5){
+                if(this.x < 94.5){
                     this.x += 1;
                 }
             }
@@ -36,9 +38,8 @@ class Hero
                 displayBullets();
             }
         }
-        console.log(y);
+        
     }
 
 }
-
 
