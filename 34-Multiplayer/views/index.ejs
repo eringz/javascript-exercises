@@ -12,25 +12,53 @@
         <script type="text/javascript">
             window.onload = (event) => {
                 const socket = io();
-                var players = [];
-                var count = 1;
-                socket.on('online_player', function(data){
-                    if(players.length > 2){
-                        players.push(new Player(data.id));
+                var player = new Player(socket.id);
+
+                var enemy1 = new Enemy(1, 150, 10);
+                function collide(){
+                    console.log('player:', player);
+                    console.log('enemy:', enemy1);
+                    if(player.x == enemy1.x && player.y == enemy1.y){
+                        console.log('player:', player);
+                        console.log('enemy:', enemy1);
+
+                        // document.getElementById('score').innerHTML = 'game over';
                     }
-                    $('#container').append(`<div id='player${count}'></div>`);
-                    count++
-                });
+
+                }
+        
+
+
+                // socket.on('new_player', function(req){
+                //     var player = new Player(req.id);
+                // });
+
+                let gameLoop = () => {
+                    collide();
+                    player.display();
+                    player.fire();
+                    player.fireMovement();
+                    enemy1.display();
+                    enemy1.movement();
+
+                }
+
+                setInterval(gameLoop, 9);
+                
+
             };
+
         </script>
     </head>
     <body>
             <audio src="/audio/nikki.mp3" id="main_audio" loop="loop"></audio>
             <audio src="/audio/bullet-fire.wav" id="bullet_audio" ></audio>
-
+            <div class="nav">SPACE IMPACT 1945</div>
+            <div class="nav">
+                <div id="score">0</div>
+            </div>
             <div id='container'>
-                <div id="nav"></div>
-                <!-- <div id='player'></div> -->
+                <div id='player'></div>
                 <div id='enemies'></div>
                 <div id='bullets'></div>	
             </div>

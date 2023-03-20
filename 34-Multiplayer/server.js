@@ -26,6 +26,7 @@ var session = require('express-session');
 
 app.use(express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
 const server = app.listen(port = 8000, function(){
     console.log('Running in localhost at port '+port);
@@ -40,8 +41,9 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
     // console.log(`${socket.id} is connected`);
-    io.emit('online_player', {id: socket.id} );
-    // socket.on('disconnect', function(){
-    //     console.log(`${socket.id} is disconnected`);
-    // })
+    socket.emit('new_player', {id: socket.id});
+
+    socket.on('disconnect', function(){
+        // console.log(`${socket.id} is disconnected`);
+    })
 });
