@@ -12,35 +12,43 @@
         <script type="text/javascript">
             window.onload = (event) => {
                 const socket = io();
-                var player = new Player(socket.id);
+                var players = [];
+                
+                socket.on('new_player', function(req){
+                    players.push(req.id);
+                    console.log('player count:', players.length);
+                    return players;
+                });
+
+                console.log('player count:', players.length);
+                var player = new Player(80);
+                
+
 
                 var blockSize = 110;
                 console.log(blockSize - (blockSize % 20));
 
-                var enemy1 = new Enemy(1, 120, 10);
+                var enemy = new Enemy(1, 120, 10);
                 function collide(){
-                    if(enemy1.x == player.x && enemy1.y == player.y){
-                        // console.log('player:', player)
+                    if(enemy.x == player.x && enemy.y == player.y){
+                        document.getElementById('dead').play();
                         document.getElementById('game-status').innerHTML = 'Game over';
-                        document.getElementById('player').backgroundImage = ``;
+                        player.position = `-110px -35px  `;
                     }
 
                 }
+
+                function bulletCollide(){
+                    
+                }
                 
-
-
-                // socket.on('new_player', function(req){
-                //     var player = new Player(req.id);
-                // });
-
                 let gameLoop = () => {
                     collide();
                     player.display();
                     player.fire();
                     player.fireMovement();
-                    enemy1.display();
-                    enemy1.movement();
-
+                    enemy.display();
+                    enemy.movement();
                 }
                 console.log('game', gameLoop());
 
@@ -56,6 +64,7 @@
     <body>
             <audio src="/audio/nikki.mp3" id="main_audio" loop="loop"></audio>
             <audio src="/audio/bullet-fire.wav" id="bullet_audio" ></audio>
+            <audio src="/audio/dead.wav" id="dead" ></audio>
             <div class="nav">SPACE IMPACT 1945</div>
             <div class="nav">
                 <div id="score">0</div>

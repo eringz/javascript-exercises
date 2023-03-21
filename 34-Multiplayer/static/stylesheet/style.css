@@ -20,29 +20,18 @@ body{
             font-size: 1.72rem;
             color: lightgray;
             background-color:#1E1E1F;
-            /* padding: 10px; */
             margin: 10px 0 10px 20px;
             width: 750px;
             height: 50px;
         }
         #player{
             background: url('/images/1942.gif');
-            background-position: -85px -180px;
             width: 28px;
             height: 28px;
             position:absolute;
             top: 90%;
             left: 20%
         }
-        /* #player2{
-            background: url('/images/1942.gif');
-            background-position: -85px -180px;
-            width:28px;
-            height:28px;
-            position:absolute;
-            top: 90%;
-            left: 80%
-        } */
         .enemy1{
             background: url('/images/1942.gif');
             background-position: 0 -10px;

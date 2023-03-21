@@ -1,17 +1,22 @@
+
+
+
+
 class Player
 {
-    constructor(id){
-        this.x = 80;
+    constructor(x){
+        this.x = x;
         this.y = 740;
         this.bullets = [];
-        this.id = id;
         this.movement();
+        this.position = '-85px -180px';
     }
     display(){
         document.getElementById('player').style['top'] = this.y + 'px';
         document.getElementById('player').style['left'] = this.x + 'px';
+        document.getElementById('player').style.backgroundPosition = this.position;
     }
-    movement(hero){
+    movement(){
         document.onkeydown = (e) => {
             var audio = document.getElementById('main_audio');
             audio.play();
@@ -38,7 +43,6 @@ class Player
                 audio.play();
                 this.bullets.push({x: this.x+5, y: this.y-12});
             }
-            // return this;
         }
         
     }
