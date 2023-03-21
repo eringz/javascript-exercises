@@ -110,4 +110,13 @@ body{
             text-align: center;
             font-family: Arial;	
         }
+        #game-status{
+            color: red;
+            /* border: 1px solid red; */
+            text-align: center;
+            margin: 300px auto;
+            padding: 20px 40px;
+            width: 100px;
+            height: 30px;
+        }
    

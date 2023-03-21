@@ -14,19 +14,19 @@
                 const socket = io();
                 var player = new Player(socket.id);
 
-                var enemy1 = new Enemy(1, 150, 10);
-                function collide(){
-                    console.log('player:', player);
-                    console.log('enemy:', enemy1);
-                    if(player.x == enemy1.x && player.y == enemy1.y){
-                        console.log('player:', player);
-                        console.log('enemy:', enemy1);
+                var blockSize = 110;
+                console.log(blockSize - (blockSize % 20));
 
-                        // document.getElementById('score').innerHTML = 'game over';
+                var enemy1 = new Enemy(1, 120, 10);
+                function collide(){
+                    if(enemy1.x == player.x && enemy1.y == player.y){
+                        // console.log('player:', player)
+                        document.getElementById('game-status').innerHTML = 'Game over';
+                        document.getElementById('player').backgroundImage = ``;
                     }
 
                 }
-        
+                
 
 
                 // socket.on('new_player', function(req){
@@ -42,8 +42,11 @@
                     enemy1.movement();
 
                 }
+                console.log('game', gameLoop());
+
 
                 setInterval(gameLoop, 9);
+
                 
 
             };
@@ -60,7 +63,8 @@
             <div id='container'>
                 <div id='player'></div>
                 <div id='enemies'></div>
-                <div id='bullets'></div>	
+                <div id='bullets'></div>
+                <div id='game-status'></div>	
             </div>
 
             <!-- <div id='players'></div> -->

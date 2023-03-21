@@ -38,6 +38,7 @@ class Player
                 audio.play();
                 this.bullets.push({x: this.x+5, y: this.y-12});
             }
+            // return this;
         }
         
     }
@@ -77,8 +78,10 @@ class Enemy
         this.y += 1;
         if(this.y > 740){
             this.y = 0;
-			this.x = Math.random()*720;
+            let new_location = Math.round(Math.random()*720);
+			this.x = new_location - (new_location % 20);
         }
+        // return this;
     }
     
 }
