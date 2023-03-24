@@ -13,14 +13,13 @@
             window.onload = (event) => {
                 const socket = io();
                 var players = [];
+                var enemy = new Enemy(7);
                 
                 socket.on('new_player', function(req){
                     players.push(req.id);
-                    console.log('player count:', players.length);
                     return players;
                 });
 
-                console.log('player count:', players.length);
                 var player = new Player(80);
                 
 
@@ -28,27 +27,27 @@
                 var blockSize = 110;
                 console.log(blockSize - (blockSize % 20));
 
-                var enemy = new Enemy(1, 120, 10);
-                function collide(){
-                    if(enemy.x == player.x && enemy.y == player.y){
-                        document.getElementById('dead').play();
-                        document.getElementById('game-status').innerHTML = 'Game over';
-                        player.position = `-110px -35px  `;
-                    }
+                // var enemy = new Enemy(1, 120, 10);
+                // function collide(){
+                //     if(enemy.x == player.x && enemy.y == player.y){
+                //         document.getElementById('dead').play();
+                //         document.getElementById('game-status').innerHTML = 'Game over';
+                //         player.position = `-110px -35px  `;
+                //     }
 
-                }
+                // }
 
                 function bulletCollide(){
                     
                 }
                 
                 let gameLoop = () => {
-                    collide();
+                    // collide();
                     player.display();
                     player.fire();
                     player.fireMovement();
-                    enemy.display();
-                    enemy.movement();
+                    // enemy.display();
+                    // enemy.movement();
                 }
                 console.log('game', gameLoop());
 

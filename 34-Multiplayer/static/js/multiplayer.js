@@ -1,4 +1,12 @@
+class Game{
+    constructor(enemy_num){
+        this.enemy = [];
+        for(let i=0; i<enemy_num; i++){
+            this.enemy.push(new Enemy(i+1));
+        }
 
+    }
+}
 
 
 
@@ -68,24 +76,26 @@ class Player
 
 class Enemy
 {
-    constructor(id, x, y){
-        this.x = x;
-        this.y = y;
+    constructor(num){
+        this.count = num;
+        this.xmap = Math.round(Math.random()*720);
+        this.x = this.xmap - (this.xmap % 20);
+        this.y = 10;
         this.id = id;
     }
     display(){
-        let output; 
-        output = `<div class='enemy${this.id}' style='top:${this.y}px; left:${this.x}px'></div>`;
+        let output = '';
+        for(let i=0; i<) 
+        output += `<div class='enemy${this.id}' style='top:${this.y}px; left:${this.x}px'></div>`;
         document.getElementById('enemies').innerHTML = output;
     }
     movement(){
         this.y += 1;
         if(this.y > 740){
             this.y = 0;
-            let new_location = Math.round(Math.random()*720);
-			this.x = new_location - (new_location % 20);
+            let new_xmap = Math.round(Math.random()*720);
+			this.x = new_xmap - (new_xmap % 20);
         }
-        // return this;
     }
     
 }
