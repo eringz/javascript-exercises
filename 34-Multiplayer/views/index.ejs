@@ -12,50 +12,30 @@
         <script type="text/javascript">
             window.onload = (event) => {
                 const socket = io();
-                var players = [];
-                var enemy = new Enemy(7);
+                var enemy = new Enemy();
                 
-                socket.on('new_player', function(req){
-                    players.push(req.id);
-                    return players;
-                });
+                socket.emit('new_player', {id: socket.id});
 
-                var player = new Player(80);
-                
+                socket.on('existing_players', (data) => {
+                    console.log('player from io server:', data.players);
+                    var players = new Player(data.players);
+                    players.display();
+                    players.movement();
 
-
-                var blockSize = 110;
-                console.log(blockSize - (blockSize % 20));
-
-                // var enemy = new Enemy(1, 120, 10);
-                // function collide(){
-                //     if(enemy.x == player.x && enemy.y == player.y){
-                //         document.getElementById('dead').play();
-                //         document.getElementById('game-status').innerHTML = 'Game over';
-                //         player.position = `-110px -35px  `;
-                //     }
-
-                // }
-
-                function bulletCollide(){
+                    let gameLoop = () => {
                     
+                    enemy.display();
+                    enemy.movement();
                 }
-                
-                let gameLoop = () => {
-                    // collide();
-                    player.display();
-                    player.fire();
-                    player.fireMovement();
-                    // enemy.display();
-                    // enemy.movement();
-                }
-                console.log('game', gameLoop());
-
-
                 setInterval(gameLoop, 9);
 
+                });
+                
                 
 
+
+                
+                
             };
 
         </script>
@@ -69,7 +49,7 @@
                 <div id="score">0</div>
             </div>
             <div id='container'>
-                <div id='player'></div>
+                <div id='players'></div>
                 <div id='enemies'></div>
                 <div id='bullets'></div>
                 <div id='game-status'></div>	

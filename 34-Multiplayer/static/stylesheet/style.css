@@ -24,14 +24,23 @@ body{
             width: 750px;
             height: 50px;
         }
-        #player{
+        /* #player{
             background: url('/images/1942.gif');
             width: 28px;
             height: 28px;
             position:absolute;
             top: 90%;
             left: 20%
-        }
+        } */
+            .player{
+                background: url('/images/1942.gif');
+                background-position: -85px -180px;
+                width: 28px;
+                height: 28px;
+                position:absolute;
+                top: 90%;
+                left: 20%
+            }
         .enemy1{
             background: url('/images/1942.gif');
             background-position: 0 -10px;

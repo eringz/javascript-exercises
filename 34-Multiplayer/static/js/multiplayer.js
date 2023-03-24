@@ -1,55 +1,47 @@
-class Game{
-    constructor(enemy_num){
-        this.enemy = [];
-        for(let i=0; i<enemy_num; i++){
-            this.enemy.push(new Enemy(i+1));
-        }
-
-    }
-}
-
-
-
 class Player
 {
-    constructor(x){
-        this.x = x;
-        this.y = 740;
+    constructor(players){
+        this.players = players;
         this.bullets = [];
         this.movement();
         this.position = '-85px -180px';
     }
     display(){
-        document.getElementById('player').style['top'] = this.y + 'px';
-        document.getElementById('player').style['left'] = this.x + 'px';
-        document.getElementById('player').style.backgroundPosition = this.position;
+        let output = '';
+        for(let i=0; i<this.players.length; i++){
+            output += `<div class='player' style='top:${this.players[i].y}px; left:${this.players[i].x}px'></div>`;
+            document.getElementById('players').innerHTML = output;
+        } 
+        console.log(output);
     }
     movement(){
         document.onkeydown = (e) => {
             var audio = document.getElementById('main_audio');
             audio.play();
-            if(e.keyCode == 38){
-                if(this.y > 7){   
-                    this.y -= 20;
+            for(let i=0; i<this.players.length; i++){
+                if(e.keyCode == 38){
+                    console.log(`player ${i+1} y:`,this.players[i].y);
+                    if(this.players[i].y > 7){   
+                        this.players[i].y -= 20;
+                    }
+                }else if(e.keyCode == 40){
+                    if(this.players[i].y < 740){
+                        this.players[i].y += 20;
+                    }
+                }else if(e.keyCode == 37){
+                    if(this.players[i].x > 1){
+                        this.players[i].x -= 20;
+                    }
+                }else if(e.keyCode == 39){
+                    if(this.players[i].x < 720){
+                        this.players[i].x += 20;
+                    }
                 }
-                
-            }else if(e.keyCode == 40){
-                if(this.y < 740){
-                    this.y += 20;
+                if(e.keyCode == 32){
+                    var audio = document.getElementById("bullet_audio");
+                    audio.play();
+                    this.payers[i].bullets.push({x: this.x+5, y: this.y-12});
                 }
-            }else if(e.keyCode == 37){
-                if(this.x > 1){
-                    this.x -= 20;
-                }
-            }else if(e.keyCode == 39){
-                if(this.x < 720){
-                    this.x += 20;
-                }
-            }
-            if(e.keyCode == 32){
-                var audio = document.getElementById("bullet_audio");
-                audio.play();
-                this.bullets.push({x: this.x+5, y: this.y-12});
             }
         }
         
@@ -76,26 +68,38 @@ class Player
 
 class Enemy
 {
-    constructor(num){
-        this.count = num;
-        this.xmap = Math.round(Math.random()*720);
-        this.x = this.xmap - (this.xmap % 20);
-        this.y = 10;
-        this.id = id;
+    constructor(){
+        this.enemies = [
+            {x: 40, y: 10},
+            {x: 120, y: 10},
+            {x: 240, y: 10},
+            {x: 380, y: 10},
+            {x: 500, y: 10},
+            {x: 600, y: 10},
+            {x: 700, y: 10},
+        ];
     }
+
     display(){
         let output = '';
-        for(let i=0; i<) 
-        output += `<div class='enemy${this.id}' style='top:${this.y}px; left:${this.x}px'></div>`;
-        document.getElementById('enemies').innerHTML = output;
+        for(let i=0; i<this.enemies.length; i++){
+            output += `<div class='enemy${i+1}' style='top:${this.enemies[i].y}px; left:${this.enemies[i].x}px'></div>`;
+            document.getElementById('enemies').innerHTML = output;
+        } 
     }
+
+    
     movement(){
-        this.y += 1;
-        if(this.y > 740){
-            this.y = 0;
-            let new_xmap = Math.round(Math.random()*720);
-			this.x = new_xmap - (new_xmap % 20);
+        for(let i=0; i<this.enemies.length; i++){
+            this.enemies[i].y += 2;
+            if(this.enemies[i].y > 740){
+                this.enemies[i].y = 0;
+                let new_xmap = Math.round(Math.random()*720);
+                this.enemies[i].x = new_xmap - (new_xmap % 20);
+            }
         }
+        
+        
     }
     
 }
