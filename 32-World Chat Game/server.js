@@ -54,13 +54,18 @@ io.on('connection', function(socket){
     });   
     
     socket.on('word_guess', function(req){
-        console.log(req);
         var word = "screen";
         if(word == req.word){
             io.emit('guess_result', {result: `${req.name} guessed the word`, color: 'blue'});
         }else{
             io.emit('guess_result', {result: `${req.name}: ${req.word}`, color: 'white'});
         }
+    });
+
+    socket.on('disconnect', function(){
+        console.log(`${socket.id} is disconnected`);
+        let result = `this ${socket.id} left the group`;
+        io.emit('disconnected_user', {result: result});
     });
 });
 

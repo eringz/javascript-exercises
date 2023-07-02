@@ -1,0 +1,62 @@
+@import url('https://fonts.cdnfonts.com/css/facebook-sans');
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Facebook Sans', sans-serif;
+}
+
+    form, div{
+        padding: 20px;
+        margin: 60px 340px;
+        width: 600px;
+        border: 1px solid gray;
+    }
+    
+    form, label, input, #submit, span{
+        display: inline-block;
+    }
+        input, textarea{
+            padding: 5px;
+        }
+
+        label, textarea{
+            border-radius: 3px;
+        }
+
+        label, input{
+            margin: 8px 20px;
+            font-size: 1rem;
+        }
+
+        label{
+            vertical-align: top;
+            width: 180px;
+        }
+
+        input{
+            width: 320px;
+            border: none;
+            border-bottom: 1px solid gray;
+        }
+
+        textarea{
+            display:block;
+            margin: 8px 20px;
+        }
+
+        #submit{
+            background-color: #2B78E4;
+            color: #BBDDF9;
+            margin-left: 488px; 
+            width: 80px;
+            height: 40px;
+            border-radius: 3px;
+        }
+
+        span.label{
+            width: 300px;
+        }
+
+        span.info{
+            width: 300px;
+        }

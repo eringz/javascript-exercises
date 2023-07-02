@@ -24,9 +24,15 @@
             });
 
             socket.on('guess_result', function(data){
+                console.log(data);
                 let str = `<p style="color:${data.color}" class="user">${data.result}</p>`;
                 content.innerHTML += str;  
             });
+
+            socket.on('disconnected_user', function(data){
+                let str =  `<p style="color:red;" class="user">${data.result}</p>`;
+                content.innerHTML += str;  
+            })
 
             $(document).on('click', '#submit', function(){
                 var word = $('#word').val();
