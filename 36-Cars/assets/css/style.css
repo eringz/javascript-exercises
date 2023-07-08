@@ -1,0 +1,35 @@
+@import url('https://fonts.cdnfonts.com/css/facebook-letter-faces');
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Facebook Letter ', sans-serif;     
+    font-weight: 100; 
+    font-size: 1.2rem;
+    color: #1D1E20;                                      
+}
+    #container, form {
+        display: inline-block;
+        padding: 20px;
+        margin: 40px 20px;
+    }
+    #container{
+        width: 78%;
+    }
+        h1, h2, p, ul {
+            margin: 20px;
+        }
+            li {
+                margin: 10px 40px;
+            }
+    form {
+        vertical-align: top;
+    }
+        input {
+            background-color: #F7091D;
+            padding: 5px 20px;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        }
+                
