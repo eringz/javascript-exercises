@@ -6,8 +6,7 @@ class Database
         this.user = 'root',
         this.password = '',
         this.database = 'mvc'
-    }
-
+    } 
 }
 
 module.exports = new Database();

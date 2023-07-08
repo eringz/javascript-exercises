@@ -12,12 +12,12 @@
         <h2>You have <%= count %> cars</h2>
         <p>The cars in the database are as follows:</p>
         <ul>
-            <li>Lamborgini - 2021</li>
-            <li>Ferrari - 2018</li>
-            <li>Mercedez-Benz - 2019</li>
+            <% for (const x in cars) { %>
+            <li><%= cars[x].name %> - <%= cars[x].year %></li>
+            <% } %>
         </ul>
     </div>
-    <form action="">
+    <form action="/reset" method="POST">
         <input type="submit" value="Reset">
     </form>
     

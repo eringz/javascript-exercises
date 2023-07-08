@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Users = require('./controllers/Users');
+const Cars = require('./controllers/Cars');
 
-router.get('/', Users.index);
+router.get('/', Cars.index);
+router.post('/reset', Cars.reset);
 
 module.exports = router;        

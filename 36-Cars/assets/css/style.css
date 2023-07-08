@@ -29,7 +29,10 @@
             padding: 5px 20px;
             border: none;
             border-radius: 3px;
-            color: white;
+            color: rgb(241, 226, 226);
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        }
+        input:hover {
+            color: white;
         }
                 
