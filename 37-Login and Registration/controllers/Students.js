@@ -1,4 +1,4 @@
-class Users
+class Students
 {
     async index(req, res)
     {
@@ -15,3 +15,5 @@ class Users
         res.render('register');
     }
 }
+
+module.exports = new Students();

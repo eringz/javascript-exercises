@@ -1,0 +1,12 @@
+* {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+}
+    body {
+        background: conic-gradient(from 45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    }
+       #container {
+        display: inline-block;
+        margin: 60px auto;
+       } 
