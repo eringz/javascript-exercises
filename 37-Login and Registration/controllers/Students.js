@@ -2,7 +2,14 @@ class Students
 {
     async index(req, res)
     {
-        res.render('index');
+        if(req.session.id)
+        {
+            res.render('index');
+        }
+        else
+        {
+            res.render('login');
+        }
     }
 
     async login(req, res)
@@ -13,6 +20,12 @@ class Students
     async register(req, res)
     {
         res.render('register');
+    }
+
+    async logout(req, res)
+    {
+        
+        res.redirect('/login');
     }
 }
 
