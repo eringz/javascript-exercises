@@ -1,4 +1,4 @@
-
+const Student = require('../models/Student');
 class Students
 {
     async index(req, res)
@@ -23,7 +23,34 @@ class Students
 
     async register(req, res)
     {
-        res.render('register');
+        console.log(`register: ${req.session.errors}`);
+        res.render('register', {errors: req.session.errors});
+    }
+
+    async registrationProcess(req, res)
+    {
+        // console.log(req.body);
+        const {firstName, lastName, email, password, confirmPassword} = req.body;
+        const validation = Student.registrationValidation(req.body)
+            .then((result) => {
+                if(result === undefined)
+                {
+                    //tobecontinued
+                    res.redirect('/login');
+                }
+                else
+                {
+                    req.session.errors = result;
+                    res.redirect('/register');
+                }
+            })
+            .catch((err) => {
+                console.log('err', err);
+            });
+
+
+
+        
     }
 
     async logout(req, res)

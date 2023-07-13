@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser')
 const config = require('./config/config');
 const routes = require('./routes');
 const session = require('express-session');
 
 app.use(express.static(__dirname + '/assets'));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(session(config.session));
 app.set('view engine', 'ejs');
 /**

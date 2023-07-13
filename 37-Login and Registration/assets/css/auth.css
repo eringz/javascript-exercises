@@ -2,9 +2,6 @@
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
 }
-
-
-
 * {
     padding: 0;
     margin: 0;
@@ -20,32 +17,35 @@
         #container {
          display: inline-block;
          padding: 20px;
-         margin:  10% 40.6%;
+         margin:  3% 40.6%;
          border: 1px solid black;
          border: 1px solid white;
         }
             h2 {
                 margin: 10px 0;
                 text-align: center;
-                text-shadow: 2px 2px #ff0000;
+                text-shadow: 1px 1px rgb(194, 239, 253);
             } 
             .login-h2 {
                 color: #037e8a;
-                
-
             }
             .register-h2 {
                 color: #035956;
             }
+            
             label {
                 display: block;
             }
             input {
+                padding: 0 10px;
                 margin: 10px 0;
                 width: 200px;
                 height: 2em;
                 border: none; 
                 border-radius: 3px;
+            }
+            #login-btn, #register-btn {
+                width: 220px;
             }
             #login-btn {
                 display: block;
@@ -56,4 +56,14 @@
                 background-color: #035956;
                 color: whitesmoke;
             }
+
+            p {
+                text-align: center;
+            }
+                a {
+                    text-decoration: none;
+                }
+                a:hover {
+                    text-decoration: underline;
+                }
     

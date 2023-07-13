@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="container">
-        <form action="">
+        <form action="/registrationProcess" method="POST">
             <h2 class="register-h2">Register</h2>
             <label for="firstName">First Name</label>
             <input type="text" name="firstName" id="firstName" />
@@ -19,6 +19,7 @@
             <label for="password">Password</label>
             <input type="text" name="password" id="password" />
             <label for="confirmPassword">Confirm Password</label>
+            <input type="text" name="confirmPassword" id="confirmPassword">
             <input id="register-btn" type="submit" value="Register">
         </form>
         <p>Already have account? <a href="/login">Log in</a></p>
