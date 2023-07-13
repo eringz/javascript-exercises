@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const config = require('./config/config');
 const routes = require('./routes');
+const session = require('express-session');
 
 app.use(express.static(__dirname + '/assets'));
 app.use(session(config.session));

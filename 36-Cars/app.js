@@ -6,7 +6,7 @@ const app = express();
 
 //Use static assets for css and app enable to use sessions.
 app.use(express.static(__dirname + '/assets'));
-app.use(session(config.session));
+// app.use(session(config.session));
 
 //Set to accept ejs files.
 app.set('view engine', 'ejs');
