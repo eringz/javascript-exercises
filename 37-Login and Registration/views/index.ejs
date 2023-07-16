@@ -9,18 +9,18 @@
 <body>
     <div id="container">
         <h1>Welcome 
-            <span>Michael</span>
+            <span><%= student.firstName %></span>
         </h1>
-        <a href="/logout">Logout</a>
+        <a href="/logout">Logoff</a>
         <div id="info">
             <p>First Name: 
-                <span>Michael</span>
+                <span><%= student.firstName %></span>
             </p>
             <p>Last Name: 
-                <span>Jordan</span>
+                <span><%= student.lastName %></span>
             </p>
             <p>Email Address: 
-                <span>mj@codingdojo.com</span>
+                <span><%= student.email %></span>
             </p>
         </div>
 

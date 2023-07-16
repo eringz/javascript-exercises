@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const db = require('../config/db');
+const bcrypt = require('bcryptjs');
 
 /**
  * Creates connection in mysql database.
@@ -18,7 +19,6 @@ class Student
 {
     async registrationValidation(student)
     {
-        console.log(`student validation`, student);
         let errors = [];
         errors.count = 0;
 
@@ -98,12 +98,71 @@ class Student
         }
     }
 
-    async getStudentByEmail(email)
+    async loginValidation(student)
     {
-        await connection.query(`SELECT * FROM students WHERE email=${email}`, (err, rows, fields) => {
-            if(err) throw err
-            console.log(rows[0]);
-        } )
+        let errors = [];
+        errors.count = 0;
+
+        /**
+            * DOCU: Validating Email Address of student's input.
+            * DEVELOPER: Ron Garcia Santos 
+        */
+        let emailRegex = /@gmail.com|@yahoo.com|@hotmail.com|@live.com|@asg.com|@dpf.com/;
+        if(student.email === '')
+        {
+            errors.email = `Email Address is required.`;
+            errors.count++;
+        }
+        else if(!emailRegex.test(student.email))
+        {
+            errors.email = `Email Address is invalid`;
+            errors.count++;
+        }
+
+        /**
+            * DOCU: Validating Password and Confirm Password of student's input.
+            * DEVELOPER: Ron Garcia SAntos 
+        */
+        if(student.password === '')
+        {
+            errors.password = `Password is required`;
+            errors.count++;
+        }
+        else if(student.password.length < 8)
+        {
+            errors.password = `Password should at least has 8 or more characters.`;
+            errors.count++;
+        }
+
+        /**
+            * DOCU: Creating a condition of returning errors when there is an existing errors.
+            * DEVELOPER: Ron Garcia Santos
+        */
+        if(errors.count > 0)
+        {
+            return errors;
+        }
+    }
+
+    async getStudentById(id, callback)
+    {
+        await connection.query(`SELECT firstName, lastName, email FROM students WHERE id="${id}"`, callback);
+    }
+
+    async getStudentByEmail(email, callback)
+    {
+        await connection.query(`SELECT * FROM students WHERE email="${email}"`, callback);
+    }
+
+    async create(student)
+    {
+        const passwordHash = bcrypt.hashSync(student.password, 10);
+        await connection.query(`INSERT INTO students(firstName, lastName, email, password, createdAt) VALUES('${student.firstName}', '${student.lastName}', '${student.email}', '${passwordHash}', NOW())`);
+    }
+    
+    async login(student, callback)
+    {
+        await connection.query(`SELECT * FROM students WHERE email="${student.email}"`, callback);
     }
 }
 
