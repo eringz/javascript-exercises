@@ -14,9 +14,17 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
- 
+
+/**
+     * DOCU: Creates a Student class as a Student model.
+     * DEVELOPER: Ron Garcia Santos
+     */ 
 class Student
 {
+    /**
+     * DOCU: This method validates user's inputs in registration form then store in errors as values per condition.
+     * DEVELOPER: Ron Garcia Santos
+     */
     async registrationValidation(student)
     {
         let errors = [];
@@ -98,6 +106,10 @@ class Student
         }
     }
 
+    /**
+     * DOCU: This method validates user's inputs in login form then store in errors as values per condition.
+     * DEVELOPER: Ron Garcia Santos
+     */
     async loginValidation(student)
     {
         let errors = [];
@@ -144,25 +156,37 @@ class Student
         }
     }
 
+    /**
+     * DOCU: This model method creates a query which get the index student's info by an id then return values as one of the parameters.
+     * DEVELOPER: Ron Garcia Santos
+     * @param {*} id 
+     * @param {*} callback 
+     */
     async getStudentById(id, callback)
     {
         await connection.query(`SELECT firstName, lastName, email FROM students WHERE id="${id}"`, callback);
     }
 
+    /**
+     * DOCU: This model method creates a query which get the student's info by an email then return values as one of the parameters.
+     * DEVELOPER: Ron Garcia Santos
+     * @param {*} email 
+     * @param {*} callback 
+     */
     async getStudentByEmail(email, callback)
     {
         await connection.query(`SELECT * FROM students WHERE email="${email}"`, callback);
     }
 
+    /**
+     * DOCU: This model method create a new student info with an encrypted password.
+     * DEVELOPER: Ron Garcia Santos
+     * @param {*} student 
+     */
     async create(student)
     {
         const passwordHash = bcrypt.hashSync(student.password, 10);
         await connection.query(`INSERT INTO students(firstName, lastName, email, password, createdAt) VALUES('${student.firstName}', '${student.lastName}', '${student.email}', '${passwordHash}', NOW())`);
-    }
-    
-    async login(student, callback)
-    {
-        await connection.query(`SELECT * FROM students WHERE email="${student.email}"`, callback);
     }
 }
 

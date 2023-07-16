@@ -12,12 +12,16 @@
             <h2 class="register-h2">Register</h2>
             <label for="firstName">First Name</label>
             <input type="text" name="firstName" id="firstName" />
+            <span><%= errors && errors.firstName %></span>
             <label for="lastName">Last Name</label>
             <input type="text" name="lastName" id="lastName">
+            <span><%= errors && errors.lastName %></span>
             <label for="email">Email</label>
             <input type="text" name="email" id="email" />
+            <span><%= errors && errors.email %></span>
             <label for="password">Password</label>
             <input type="password" name="password" id="password" />
+            <span><%= errors && errors.password %></span>
             <label for="confirmPassword">Confirm Password</label>
             <input type="password" name="confirmPassword" id="confirmPassword">
             <input id="register-btn" type="submit" value="Register">

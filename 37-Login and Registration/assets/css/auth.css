@@ -59,6 +59,8 @@
                 color: whitesmoke;
             }
                 span {
+                    display: block;
+                    margin-top: 5px;
                     font-size: .85rem;
                     color: #660000;
                 }
