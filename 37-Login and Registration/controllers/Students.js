@@ -1,3 +1,4 @@
+const { password } = require('../config/db');
 const Student = require('../models/Student');
 const bcrypt = require('bcryptjs');
 
@@ -6,9 +7,9 @@ class Students
     async index(req, res)
     {
         
-        if(req.session.userId)
+        if(req.session.studentId)
         {
-            const student = Student.getStudentById(req.session.userId, (err, results) => {
+            const student = Student.getStudentById(req.session.studentId, (err, results) => {
                 if(err) throw err;
                 console.log('index results:', results[0]);
                 res.render('index', {student: results[0]} );
@@ -18,18 +19,31 @@ class Students
         }
         else
         {
-            res.render('login');
+            res.render('login', {errors: {
+                email: (req.session.errorEmail) && req.session.errorEmail,
+                password: (req.session.errorPassword) && req.session.errorPassword
+            }});
         }
     }
 
     async login(req, res)
     {
-        res.render('login');
+        res.render('login', {errors: {
+            email: (req.session.errorEmail) && req.session.errorEmail,
+            password: (req.session.errorPassword) && req.session.errorPassword
+        }});
     }
 
     async register(req, res)
     {
-        res.render('register');
+        console.log('sessions:', req.session);
+        res.render('register', {errors: {
+            firstName: (req.session.errorFirstName) && req.session.errorFirstName,
+            lastName: (req.session.errorLastName) && req.session.errorLastName,
+            email: (req.session.errorEmail) && req.session.errorEmail,
+            password: (req.session.errorPassword) && req.session.errorPassword
+        }});
+
     }
 
     async registrationProcess(req, res)
@@ -43,7 +57,7 @@ class Students
                         if(err) throw err;
                         if(results[0])
                         {
-                            console.log('email already exist');
+                            req.session.errorEmail = 'Email Adress is already exist';
                             res.redirect('/register');
                         }
                         else
@@ -56,6 +70,10 @@ class Students
                 }
                 else
                 {
+                    req.session.errorFirstName = result.firstName;
+                    req.session.errorLastName = result.lastName;
+                    req.session.email = result.email;
+                    req.session.password = result.password;
                     res.redirect('/register');
                 }
             })
@@ -80,14 +98,15 @@ class Students
                     }
                     else
                     {
-                        req.session.userId = results[0].id;
+                        req.session.studentId = results[0].id;
                         res.redirect('/');
                     }
                 });
             }
             else
             {
-                console.log(result);
+                req.session.errorEmail = result.email;
+                req.session.errorPassword = result.password
                 res.redirect('/login');
             }
         })

@@ -34,17 +34,19 @@
             }
             
             label {
-                display: block;
+                display: inline-block;
+                margin: 10px 0 0 0;
             }
             input {
                 padding: 0 10px;
-                margin: 10px 0;
+                margin: 10px 0 0 0;
                 width: 200px;
                 height: 2em;
                 border: none; 
                 border-radius: 3px;
             }
             #login-btn, #register-btn {
+                margin: 20px 0;
                 width: 220px;
             }
             #login-btn {
@@ -56,6 +58,10 @@
                 background-color: #035956;
                 color: whitesmoke;
             }
+                span {
+                    font-size: .85rem;
+                    color: #660000;
+                }
 
             p {
                 text-align: center;
