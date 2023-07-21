@@ -11,6 +11,6 @@ exports.mid =  (req, res, next) => {
 }
 
 exports.time = async (req, res, next) => {
-    
+    console.log(`Time: ${Date.now()}`);
     next();
 }
