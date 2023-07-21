@@ -1,63 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Group Chat</title>
-    <link rel="stylesheet" href="/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type ="text/javascript">
-        $(document).ready(function (){
-
-            var name = prompt('What is your name');
-            const socket = io.connect();
-            var session_id = "";
-
-            console.log(socket);
-
-            socket.emit("got_a_new_user", {name: name});
-
-            // socket.on('existing_users',function(data){
-            //     let str = ``;
-                
-            //     for(let i=0; i<data.length; i++){
-            //         str += `<div class="chatbox" id="${data[i].session_id}"><h2>${data[i].name} </h2></div>`
-            //     }
-            //     document.getElementById('group').innerHTML = str;
-            // });
-
-            socket.on("new_user", function(req){
-                
-                console.log('user socket id:', req.id);
-                console.log('conncected', socket.connected);
-                let str = `<div class="chatbox" id="${req.session_id}"><h2>${req.new_user_name} </h2></div>`;
-                document.getElementById('group').innerHTML += str;
-                // if(socket.id && socket.connected == FALSE ){
-                //     console.log('there is disconnection');
-                //     socket.emit('disconnected_socket', {session_id: socket.id})
-                // }else{
-                //     console.log('user is online');
-                // }
-            });
-            socket.on('session_id', function(data){
-                console.log('this socket:', data.session_id);
-            });
-            
-
-            // socket.on('disconnected_user', function(req){
-            //     document.getElementById(`${req.session_id}`).remove();
-            //     console.log(req.id+' is disconnected');
-            // });
-
-        });
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello</title>
 </head>
 <body>
-    <h1>Welcome to Chatroom</h1>
-    <div id="announcement"></div>  
-    <div id="group">
-
-    </div>
-    <!-- <div id="chatbox">
-        <h2>Sample Name</h2>
-    </div> -->
+    <h1>Hello Guest</h1>
 </body>
 </html>
